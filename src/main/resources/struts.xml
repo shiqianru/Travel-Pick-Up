@@ -36,6 +36,6 @@
 		</action>
 	</package>
 	
-	<!-- <include file="Test.xml"/> -->
+	<include file="struts/struts-user.xml"/>
 	
 </struts>

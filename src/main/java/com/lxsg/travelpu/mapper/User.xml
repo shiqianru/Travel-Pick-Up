@@ -3,13 +3,29 @@
     
 <!--映射文件中namespace要和dao层接口名称一致 -->
 <mapper namespace="com.lxsg.travelpu.dao.UserDao">
-	<!-- <resultMap type="User" id="userMap">
-		<result property="name" column="name" jdbcType="VARCHAR"/>
-		<result property="age" column="age" jdbcType="VARCHAR"/>
-	</resultMap> -->
     
     <!--id应该是接口中的方法，结果类型如没有配置别名则应该使用全名称 -->
     <select id="getAll" resultType="User">
         select * from user
     </select>
+    
+    <select id="checkUser" resultType="string" parameterType="string">
+        select u.password from user u where u.username=#{username}
+    </select>
+    
+    <select id="getUserByName" parameterType="com.lxsg.travelpu.doman.UserVO" resultType="User">
+    	select * from user u where u.username=#{username}
+    </select>
+    
+    <!-- 新插入行的主键（primary key）；需要包含<selectKey>语句，才会返回主键，否则返回值为null -->
+    <insert id="regist" parameterType="User">
+        insert into user (username,password,displayPicUrl) value(#{username},#{password},#{displayPicUrl})
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id" >
+            SELECT @@IDENTITY AS ID
+        </selectKey>
+	</insert>
+	
+	<select id="isNameExist" resultType="User">
+		select * from user u where u.username=#{username}
+	</select>
 </mapper>

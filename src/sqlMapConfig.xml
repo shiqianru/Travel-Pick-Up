@@ -7,12 +7,13 @@
         <setting name="lazyLoadingEnabled" value="true" />
         <setting name="aggressiveLazyLoading" value="false" />
         <setting name="mapUnderscoreToCamelCase" value="true" />
+        <setting name="jdbcTypeForNull" value="NULL" />
     </settings>
     
     <!-- 别名要配置在configuration.xml -->
     <typeAliases>
     	<!-- <package name="com.lxsg.travelpu.doman.mapper"/> -->
-        <typeAlias type="com.lxsg.travelpu.doman.User" alias="User"/>
+        <typeAlias type="com.lxsg.travelpu.pojo.User" alias="User"/>
     </typeAliases>
     
     <!-- 映射文件开始 -->

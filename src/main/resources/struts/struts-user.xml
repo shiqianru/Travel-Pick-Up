@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="user" extends="struts-default" namespace="/">
+		<action name="checkUser" class="com.lxsg.travelpu.controller.user.UserAction" method="checkUser">
+		</action>
+		
+		<action name="login" class="com.lxsg.travelpu.controller.user.UserAction" method="login">
+			<result name="success">/jsp/index.jsp</result>
+		</action>
+		
+		<action name="regist" class="com.lxsg.travelpu.controller.user.UserAction" method="regist">
+			<!-- 指定（限制）上传文件的类型，定义局部拦截器，修改默认拦截器的属性 
+                "fileUpload.maximumSize" ：限制上传最大的文件大小。 
+                "fileUpload.allowedTypes"：允许上传文件的类型。 
+                "fileUpload.allowedExtensions"：允许上传文件的可扩展文件类型。 -->
+            <interceptor-ref name="defaultStack">
+                <param name="fileUpload.maximumSize">500000000</param>
+                <param name="allowedTypes">
+				      image/bmp,image/png,image/gif,image/jpeg,image/jpg,
+				      image/pjpeg ,image/bmp, image/gif, image/x-png,
+				</param>
+                <param name="fileUpload.allowedExtensions">.jpg,.png</param>
+            </interceptor-ref>
+            <result name="success">/jsp/index.jsp</result>
+            <result name="error">/jsp/error.jsp</result>
+		</action>
+		
+		<action name="isNameExist" class="com.lxsg.travelpu.controller.user.UserAction" method="isNameExist"></action>
+	</package>
+	
+	
+</struts>
