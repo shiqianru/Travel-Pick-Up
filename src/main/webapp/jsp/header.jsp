@@ -15,11 +15,18 @@
 
 					  <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
 					    <ul class="navbar-nav">
-							<li><a href="#home">主页</a></li>
-							<li><a href="jsp/scenery/search.jsp">推荐</a></li>
+							<li><a href="#home">首页</a></li>
+							<li><a href="attractions/getRecommend.action">推荐</a></li>
 							<li><a href="#travel">广场</a></li>
 							<li><a href="#fashion">fashion</a></li>
-							<li><a href="#team">team</a></li>
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown">我的</a>
+								<div class="dropdown-menu">
+						        <a class="dropdown-item" href="post/getAllPost.action">主页</a>
+						        <a class="dropdown-item" href="jsp/user/post.jsp">发帖</a>
+						        <a class="dropdown-item" href="category.html">相册</a>
+						      </div>
+							</li>
 							<!-- Dropdown -->
 						    <li class="dropdown">
 						      <a class="dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">

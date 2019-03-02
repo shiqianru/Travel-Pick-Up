@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!--映射文件中namespace要和dao层接口名称一致 -->
+<mapper namespace="com.lxsg.travelpu.dao.RecommendDao">
+    
+    <!--id应该是接口中的方法，结果类型如没有配置别名则应该使用全名称 -->
+    <select id="getRecommend" resultType="com.lxsg.travelpu.doman.AttractionsVO">
+        select * from attractions a order by a.basicScore desc;
+    </select>
+    
+	<select id="getAttrDetail" resultType="com.lxsg.travelpu.doman.AttractionsVO">
+		select * from attractions a where a.viewTitle=#{viewTitle}
+	</select>
+	
+	<select id="getAllCitys" resultType="com.lxsg.travelpu.doman.CityVO">
+		select * from city
+	</select>
+	
+	<select id="getAllFoods" resultType="com.lxsg.travelpu.doman.FoodVO">
+		select * from food
+	</select>
+	
+	<select id="getAttrOfCity" resultType="com.lxsg.travelpu.doman.AttractionsVO">
+		select * from attractions a where a.cityId=#{id}
+	</select>
+</mapper>

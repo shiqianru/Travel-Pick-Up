@@ -35,6 +35,23 @@
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/owl.carousel.css">
         <link rel="stylesheet" href="css/main.css">
+        
+    <style type="text/css">
+		img{  
+		    width: auto;  
+		    height: auto;  
+		    max-width: 100%;  
+		    max-height: 100%;     
+		}
+		p{
+		  word-wrap: break-word;
+		  word-break: break-all;
+		  overflow: hidden;
+		}
+		.citySpan a:hover{
+			color:#80DEF6;
+		}
+	</style>
     </head>
     <body>
 
@@ -71,158 +88,41 @@
             <div class="row justify-content-center d-flex">
                 <div class="col-lg-8">
                     <div class="post-lists search-list">
-                        <div class="single-list flex-row d-flex">
-                            <div class="thumb">
-                                <div class="date">
-                                    <span>20</span><br>Dec
-                                </div>
-                                <image src="image/asset/l1.jpg" alt="">
-                            </div>
-                            <div class="detail">
-                                <a href="#"><h4 class="pb-20">Addiction When Gambling <br>
-                                Becomes A Problem</h4></a>
-                                <p>
-                                    inappropriate behavior Lorem ipsum dolor sit amet, consecteturinapprop riate behavior Lorem ipsum dolor sit amet, consectetur.
-                                </p>
-                                <p class="footer pt-20">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                <a href="#">06 Likes</a>     <i class="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a href="#">02 Comments</a>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="single-list flex-row d-flex">
-                            <div class="thumb">
-                                <div class="date">
-                                    <span>20</span><br>Dec
-                                </div>
-                                <image src="image/asset/l2.jpg" alt="">
-                            </div>
-                            <div class="detail">
-                                <a href="#"><h4 class="pb-20">Addiction When Gambling <br>
-                                Becomes A Problem</h4></a>
-                                <p>
-                                    inappropriate behavior Lorem ipsum dolor sit amet, consecteturinapprop riate behavior Lorem ipsum dolor sit amet, consectetur.
-                                </p>
-                                <p class="footer pt-20">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                <a href="#">06 Likes</a>     <i class="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a href="#">02 Comments</a>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="single-list flex-row d-flex">
-                            <div class="thumb">
-                                <div class="date">
-                                    <span>20</span><br>Dec
-                                </div>
-                                <image src="image/asset/l3.jpg" alt="">
-                            </div>
-                            <div class="detail">
-                                <a href="#"><h4 class="pb-20">Addiction When Gambling <br>
-                                Becomes A Problem</h4></a>
-                                <p>
-                                    inappropriate behavior Lorem ipsum dolor sit amet, consecteturinapprop riate behavior Lorem ipsum dolor sit amet, consectetur.
-                                </p>
-                                <p class="footer pt-20">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                <a href="#">06 Likes</a>     <i class="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a href="#">02 Comments</a>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="single-list flex-row d-flex">
-                            <div class="thumb">
-                                <div class="date">
-                                    <span>20</span><br>Dec
-                                </div>
-                                <image src="image/asset/l4.jpg" alt="">
-                            </div>
-                            <div class="detail">
-                                <a href="#"><h4 class="pb-20">Addiction When Gambling <br>
-                                Becomes A Problem</h4></a>
-                                <p>
-                                    inappropriate behavior Lorem ipsum dolor sit amet, consecteturinapprop riate behavior Lorem ipsum dolor sit amet, consectetur.
-                                </p>
-                                <p class="footer pt-20">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                <a href="#">06 Likes</a>     <i class="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a href="#">02 Comments</a>
-                                </p>
-                            </div>
-                        </div> 
-                        <div class="single-list flex-row d-flex">
-                            <div class="thumb">
-                                <div class="date">
-                                    <span>20</span><br>Dec
-                                </div>
-                                <image src="image/asset/l1.jpg" alt="">
-                            </div>
-                            <div class="detail">
-                                <a href="#"><h4 class="pb-20">Addiction When Gambling <br>
-                                Becomes A Problem</h4></a>
-                                <p>
-                                    inappropriate behavior Lorem ipsum dolor sit amet, consecteturinapprop riate behavior Lorem ipsum dolor sit amet, consectetur.
-                                </p>
-                                <p class="footer pt-20">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                <a href="#">06 Likes</a>     <i class="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a href="#">02 Comments</a>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="single-list flex-row d-flex">
-                            <div class="thumb">
-                                <div class="date">
-                                    <span>20</span><br>Dec
-                                </div>
-                                <image src="image/asset/l2.jpg" alt="">
-                            </div>
-                            <div class="detail">
-                                <a href="#"><h4 class="pb-20">Addiction When Gambling <br>
-                                Becomes A Problem</h4></a>
-                                <p>
-                                    inappropriate behavior Lorem ipsum dolor sit amet, consecteturinapprop riate behavior Lorem ipsum dolor sit amet, consectetur.
-                                </p>
-                                <p class="footer pt-20">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                <a href="#">06 Likes</a>     <i class="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a href="#">02 Comments</a>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="single-list flex-row d-flex">
-                            <div class="thumb">
-                                <div class="date">
-                                    <span>20</span><br>Dec
-                                </div>
-                                <image src="image/asset/l3.jpg" alt="">
-                            </div>
-                            <div class="detail">
-                                <a href="#"><h4 class="pb-20">Addiction When Gambling <br>
-                                Becomes A Problem</h4></a>
-                                <p>
-                                    inappropriate behavior Lorem ipsum dolor sit amet, consecteturinapprop riate behavior Lorem ipsum dolor sit amet, consectetur.
-                                </p>
-                                <p class="footer pt-20">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                <a href="#">06 Likes</a>     <i class="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a href="#">02 Comments</a>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="single-list flex-row d-flex">
-                            <div class="thumb">
-                                <div class="date">
-                                    <span>20</span><br>Dec
-                                </div>
-                                <image src="image/asset/l4.jpg" alt="">
-                            </div>
-                            <div class="detail">
-                                <a href="#"><h4 class="pb-20">Addiction When Gambling <br>
-                                Becomes A Problem</h4></a>
-                                <p>
-                                    inappropriate behavior Lorem ipsum dolor sit amet, consecteturinapprop riate behavior Lorem ipsum dolor sit amet, consectetur.
-                                </p>
-                                <p class="footer pt-20">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                <a href="#">06 Likes</a>     <i class="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a href="#">02 Comments</a>
-                                </p>
-                            </div>
-                        </div>                             
+	                    <s:iterator value="#session.attractionList" var="attraction">
+	                    	<div class="single-list flex-row d-flex" style="width: 700px;height: 250px;"><!-- 一个单元 -->
+	                            <div class="thumb" style="width: 30%;height: 100%;">
+	                                <img src="image/asset/l1.jpg" alt="" />
+	                            </div>
+	                            <div class="detail" style="width: 70%;height: 100%;padding-bottom: 20px;">
+	                            	<div style="width: 100%;height: 20%;">
+	                               		<a href="attractions/getAttrDetail.action?viewTitle=${attraction.viewTitle }"><h4 class="pb-20">${attraction.viewTitle }</h4></a>
+	                                </div>
+	                                <div style="width: 100%;height:50%;">
+	                                	<p class="viewDiscrib">
+		                                     ${attraction.viewDiscrib}
+		                                </p>
+	                                </div>
+	                                
+	                                <div id="view-label"  style="width: 100%;height: 30%;">
+	                                	<s:if test="#attraction.viewPoint1 != null">
+	                                		<div style="width: 90px;height: 40px;border: solid 1px #D5D5D5;float: left;margin-right: 10px;line-height:40px;text-align: center;">${attraction.viewPoint1 }</div>
+	                                	</s:if>
+	                                	<s:if test="#attraction.viewPoint2 != null">
+	                                		<div style="width: 90px;height: 40px;border: solid 1px #D5D5D5;float: left;margin-right: 10px;line-height:40px;text-align: center;">${attraction.viewPoint2 }</div>
+	                                	</s:if>
+	                                	<s:if test="#attraction.viewPoint3 != null">
+	                                		<div style="width: 90px;height: 40px;border: solid 1px #D5D5D5;float: left;margin-right: 10px;line-height:40px;text-align: center;">${attraction.viewPoint3 }</div>
+	                                	</s:if>
+	                                	<s:if test="#attraction.viewPoint4 != null">
+	                                		<div style="width: 90px;height: 40px;border: solid 1px #D5D5D5;float: left;margin-right: 10px;line-height:40px;text-align: center;">${attraction.viewPoint4 }</div>
+	                                	</s:if>
+	                                	<s:if test="#attraction.viewPoint5 != null">
+	                                		<div style="width: 90px;height: 40px;border: solid 1px #D5D5D5;float: left;margin-right: 10px;line-height:40px;text-align: center;">${attraction.viewPoint5 }</div>
+	                                	</s:if>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </s:iterator>
                         <div class="justify-content-center d-flex">
                             <a class="text-uppercase primary-btn loadmore-btn mt-40 mb-60" href="#"> Load More Post</a>
                         </div>                                                                     
@@ -243,18 +143,42 @@
                         </div> 
                     </div>
 
-                    <div class="single_widget about_widget">
-                        <image src="image/asset/s-image.jpg" alt="">
-                        <h2 class="text-uppercase">Adele Gonzalez</h2>
-                        <p>
-                            MCSE boot camps have its supporters and
-                            its detractors. Some people do not understand why you should have to spend money
-                        </p>
-                        <div class="social-link">
-                            <a href="#"><button class="btn"><i class="fa fa-facebook" aria-hidden="true"></i> Like</button></a>
-                            <a href="#"><button class="btn"><i class="fa fa-twitter" aria-hidden="true"></i> follow</button></a>
-                        </div>
-                    </div>
+                    <div class="single_widget tag_widget">
+                    	<div id="citySpan" style="width: 100%;height: 50%;">
+                    		<div class="citySpan" style="width: 100%;height: 20%;">
+                    			<h4 class="text-uppercase pb-20">城市(<a href="attractions/getAllSigns.action">更多</a>)</h4>
+                    		</div>
+                    		<div style="width: 100%;height: 80%;">
+	                    		<ul>
+		                            <li><a href="#">北京</a></li>
+		                            <li><a href="#">上海</a></li>
+		                            <li><a href="#">杭州</a></li>
+		                            <li><a href="#">西藏</a></li>
+		                            <li><a href="#">武汉</a></li>
+		                            <li><a href="#">湖南</a></li>
+		                            <li><a href="#">台湾</a></li>
+		                            <li><a href="#">新疆</a></li>
+		                            <li><a href="#">成都</a></li>
+		                        </ul>
+                    		</div>
+	                       
+                    	</div>
+                        <div id="attractionSpan" style="width: 100%;height: 50%;">
+                    		<h4 class="text-uppercase pb-20">景点</h4>
+	                        <ul>
+	                            <li><a href="#">北京</a></li>
+	                            <li><a href="#">上海</a></li>
+	                            <li><a href="#">杭州</a></li>
+	                            <li><a href="#">西藏</a></li>
+	                            <li><a href="#">武汉</a></li>
+	                            <li><a href="#">湖南</a></li>
+	                            <li><a href="#">台湾</a></li>
+	                            <li><a href="#">新疆</a></li>
+	                            <li><a href="#">成都</a></li>
+	                        </ul>
+                    	</div>
+                    </div> 
+                    
                     <div class="single_widget cat_widget">
                         <h4 class="text-uppercase pb-20">post categories</h4>
                         <ul>
@@ -332,20 +256,6 @@
                                 <a href="#">Jun'17 <span>37</span></a>
                             </li>                                
                         </ul>
-                    </div> 
-                    <div class="single_widget tag_widget">
-                        <h4 class="text-uppercase pb-20">Tag Clouds</h4>
-                        <ul>
-                            <li><a href="#">Lifestyle</a></li>
-                            <li><a href="#">Art</a></li>
-                            <li><a href="#">Adventure</a></li>
-                            <li><a href="#">Food</a></li>
-                            <li><a href="#">Technology</a></li>
-                            <li><a href="#">Fashion</a></li>
-                            <li><a href="#">Adventure</a></li>
-                            <li><a href="#">Food</a></li>
-                            <li><a href="#">Technology</a></li>
-                        </ul>
                     </div>                                                 
                 </div>
             </div>
@@ -367,4 +277,16 @@
         <script src="js/jquery.sticky.js"></script>
         <script src="js/main.js"></script>  
     </body>
+    <script type="text/javascript">
+    $(window).load(function(){
+    	var content=$(".viewDiscrib");
+    	$(".viewDiscrib").each(function(){
+    	   if($(this).text().length>180){
+    		   $(this).text($(this).text().substring(0,180)+"...");
+	       	}
+    	});
+    	
+    })
+   
+    </script>
 </html>

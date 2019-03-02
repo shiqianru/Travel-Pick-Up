@@ -2,6 +2,10 @@ package com.lxsg.travelpu.controller.user;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -17,8 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.lxsg.common.ConstantClassField;
+import com.lxsg.travelpu.doman.CategoryUrlVO;
+import com.lxsg.travelpu.doman.PostVO;
 import com.lxsg.travelpu.doman.UserVO;
 import com.lxsg.travelpu.pojo.User;
 import com.lxsg.travelpu.service.user.UserService;
@@ -27,7 +34,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 @Controller
 @RequestMapping("/user")
-public class UserAction extends ActionSupport {
+public class UserAction extends ActionSupport{
 	
 	@Autowired
 	private UserService userService;
@@ -54,34 +61,7 @@ public class UserAction extends ActionSupport {
 		this.password = password;
 	}
 	
-	//文件上传
-	private File myfile; //得到上传的文件
-    private String myfileContentType; //得到文件的类型
-    private String myfileFileName; //得到文件的名称
-
-	public File getMyfile() {
-		return myfile;
-	}
-
-	public void setMyfile(File myfile) {
-		this.myfile = myfile;
-	}
-
-	public String getMyfileContentType() {
-		return myfileContentType;
-	}
-
-	public void setMyfileContentType(String myfileContentType) {
-		this.myfileContentType = myfileContentType;
-	}
-
-	public String getMyfileFileName() {
-		return myfileFileName;
-	}
-
-	public void setMyfileFileName(String myfileFileName) {
-		this.myfileFileName = myfileFileName;
-	}
+	
 
 	public String editMaterial(){
 		String flag=userService.editMaterial();
@@ -90,6 +70,34 @@ public class UserAction extends ActionSupport {
 		}
 		return ERROR;
 	}
+	//文件上传
+			private File myfile; //得到上传的文件
+		    private String myfileContentType; //得到文件的类型
+		    private String myfileFileName; //得到文件的名称
+
+			public File getMyfile() {
+				return myfile;
+			}
+
+			public void setMyfile(File myfile) {
+				this.myfile = myfile;
+			}
+
+			public String getMyfileContentType() {
+				return myfileContentType;
+			}
+
+			public void setMyfileContentType(String myfileContentType) {
+				this.myfileContentType = myfileContentType;
+			}
+
+			public String getMyfileFileName() {
+				return myfileFileName;
+			}
+
+			public void setMyfileFileName(String myfileFileName) {
+				this.myfileFileName = myfileFileName;
+			}
 	
 	/**
 	 * 登录时验证用户名密码
@@ -124,9 +132,9 @@ public class UserAction extends ActionSupport {
 		userVO.setPassword(password);
 		userVO.setUsername(username);
 		
-		User user=userService.getUserByName(userVO);
+		UserVO u=userService.getUserByName(userVO);
 		
-		ActionContext.getContext().getSession().put("user", user);
+		ActionContext.getContext().getSession().put("userVO", u);
 		
 		
 		return SUCCESS;
@@ -138,24 +146,28 @@ public class UserAction extends ActionSupport {
 	 */
 	@RequestMapping("/regist")
 	public String regist(){
-		User user=new User();
+		UserVO userVO=new UserVO();
 		if(myfile!=null){
 			uploadDisplayPic();
-			user.setDisplayPicUrl("upload/"+myfileFileName);
+			userVO.setDisplayPicUrl("upload/"+myfileFileName);
 			System.out.println(myfileFileName);
 		}
-		user.setUsername(username);
-		user.setPassword(password);
+		userVO.setUsername(username);
+		userVO.setPassword(password);
 		
-		Integer id=userService.regist(user);
+		Integer id=userService.regist(userVO);
 		if(id!=null){
-			ActionContext.getContext().getSession().put("user", user);
+			ActionContext.getContext().getSession().put("userVO", userVO);
 			return SUCCESS;
 		}
 		
         return ERROR;
     }
 	
+	/**
+	 * 上传头像
+	 * @return
+	 */
 	public String uploadDisplayPic(){
 		//获取要保存文件夹的物理路径(绝对路径)
         String realPath=ServletActionContext.getServletContext().getRealPath("/upload");
@@ -202,4 +214,8 @@ public class UserAction extends ActionSupport {
 		}
 		return null;
 	}
+	
+	
+	
+	
 }

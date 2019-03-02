@@ -60,7 +60,7 @@
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
         <tx:attributes>
             <tx:method name="insert*" propagation="REQUIRED" />
-            <tx:method name="update*" propagation="REQUIRED" />
+            <!-- <tx:method name="update*" propagation="REQUIRED" /> -->
             <tx:method name="delete*" propagation="REQUIRED" />
 
             <tx:method name="get*" propagation="SUPPORTS" />
@@ -73,6 +73,7 @@
         <aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
     </aop:config>
     
+    <!-- <bean id="checkLogin" class="com.lxsg.common.CommonInterceptor"></bean> -->
     
     <!-- myBatis文件 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

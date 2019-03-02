@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxsg.travelpu.dao.PostDao">
+    <resultMap type="com.lxsg.travelpu.doman.CommentVO" id="commentMap">
+	    <id column="c_id" property="c_id" jdbcType="INTEGER"/>
+	    <result column="userId" property="userId" jdbcType="INTEGER"/>
+	    <result column="postId" property="userId" jdbcType="INTEGER"/>
+	    <result column="commentId" property="commentId" jdbcType="INTEGER"/>
+	    <result column="commentTime" property="commentTime" jdbcType="VARCHAR"/>
+	    <result column="commentContent" property="commentContent" jdbcType="VARCHAR"/>
+	    
+	    <association property="user" javaType="com.lxsg.travelpu.doman.UserVO">
+	   		<id column="id" jdbcType="INTEGER" property="id"/>
+	   	 	<result  column="username" jdbcType="VARCHAR" property="username"/>
+	   	 	<result  column="password" jdbcType="VARCHAR" property="password"/>
+	   	 	<result  column="introduce" jdbcType="VARCHAR" property="introduce"/>
+	   	 	<result  column="displayPicUrl" jdbcType="VARCHAR" property="displayPicUrl"/>
+	 	</association>	
+	</resultMap>
+    	
+	<insert id="post" parameterType="com.lxsg.travelpu.doman.PostVO" useGeneratedKeys="true" keyProperty="id">
+		insert into post (postName,postTime,postContent,postPoint1,postPoint2,postPoint3) 
+		value(#{postName},DATE_FORMAT(NOW(),'%b %d %Y %H:%i:%s'),#{postContent},#{postPoint1},#{postPoint2},#{postPoint3})
+	</insert>
+	
+    
+	<select id="getAllPost" resultType="com.lxsg.travelpu.doman.PostVO" parameterType="int" >
+		select * from post p where p.userId=#{id}
+	</select>
+	
+	<select id="getPostDetail" resultType="com.lxsg.travelpu.doman.PostVO" parameterType="int" >
+		select * from post p where p.id=#{id}
+	</select>
+	
+	<update id="updateUserId">
+		update post set userId=#{1,jdbcType=INTEGER} where id=#{0,jdbcType=INTEGER}
+	</update>
+	
+	<insert id="insertCategory" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+		insert into categoryurl
+        (imageUrl,userId,upTime)
+        values
+        <foreach collection="list" item="categoryUrlVO" index="index" separator="," >
+          (#{categoryUrlVO.imageUrl},#{categoryUrlVO.userId},DATE_FORMAT(NOW(),'%b %d %Y %H:%i:%s'))
+        </foreach>
+	</insert>
+	
+	<update id="updatePostId">
+		update categoryurl c set c.postId=#{1,jdbcType=INTEGER} where c.id=#{0,jdbcType=INTEGER}
+	</update>
+	
+	<select id="getCategoryByPostId" parameterType="int" resultType="com.lxsg.travelpu.doman.CategoryUrlVO">
+		select * from categoryUrl c where c.postId=#{0,jdbcType=INTEGER} and c.userId=#{1,jdbcType=INTEGER}
+	</select>
+	
+	<insert id="laudPost" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.lxsg.travelpu.doman.LikeVO">
+		insert into `like` (userId,postId,commentId,likeTime) 
+		values(#{userId,jdbcType=INTEGER},#{postId,jdbcType=INTEGER},#{commentId,jdbcType=INTEGER},DATE_FORMAT(NOW(),'%b %d %Y %H:%i:%s'))
+	</insert>
+	
+	<select id="getPostLikeCount" parameterType="int" resultType="int">
+		select count(*) from `like` where postId=#{postId}
+	</select>
+	<select id="getPostCommentCount" parameterType="int" resultType="int">
+		select count(*) from comment c where c.postId=#{postId}
+	</select>
+	
+	<select id="isUserLikeThisPost" resultType="int">
+		select count(*) from `like` where postId=#{0,jdbcType=INTEGER} and userId=#{1,jdbcType=INTEGER}
+	</select>
+	
+	<delete id="cancellaudPost" parameterType="com.lxsg.travelpu.doman.LikeVO">
+		delete from `like` where postId=#{postId,jdbcType=INTEGER} and userId=#{userId,jdbcType=INTEGER}
+	</delete>
+
+	<insert id="commentPost" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.lxsg.travelpu.doman.CommentVO">
+		insert into comment(userId,postId,commentId,commentTime,commentContent) 
+		values(#{userId,jdbcType=INTEGER},#{postId,jdbcType=INTEGER},#{commentId,jdbcType=INTEGER},DATE_FORMAT(NOW(),'%b %d %Y %H:%i:%s'),#{commentContent,jdbcType=VARCHAR})
+	</insert>
+	
+	<select id="getAllCommentOfPost" resultMap="commentMap" parameterType="int">
+		select * from comment c,user u where u.id=c.userId and c.postId=#{postId}
+	</select>
+	
+	<select id="isUserCommentThisPost" resultType="int">
+		select count(*) from comment c where c.userId=#{1,jdbcType=INTEGER} and c.postId=#{0,jdbcType=INTEGER}
+	</select>
+</mapper>

@@ -50,7 +50,7 @@
 							探索你的心.								
 						</h1>
 					</div>	
-					<s:if test="#session.user!=null">
+					<s:if test="#session.userVO!=null">
 						<div class="head-bottom-meta d-flex justify-content-between align-items-end col-lg-12">
 							<div class="col-lg-6 flex-row d-flex meta-left no-padding">
 								<p><span class="lnr lnr-heart"></span> 15 Likes</p>
@@ -59,15 +59,15 @@
 							<a href="jsp/user/personalEdit.jsp" class="col-lg-6 flex-row d-flex meta-right no-padding justify-content-end">
 								<div class="col-lg-6 flex-row d-flex meta-right no-padding justify-content-end">
 								<div class="user-meta">
-									<h4 class="text-white"><s:property value="#session.user.username"/></h4>
-									<s:if test="#session.user.introduce==null">
+									<h4 class="text-white"><s:property value="#session.userVO.username"/></h4>
+									<s:if test="#session.userVO.introduce==null">
 										<p>快来编辑你的个性签名吧！</p>
 									</s:if>
 									<s:else>
-										<p>${user.introduce }</p>
+										<p>${userVO.introduce }</p>
 									</s:else>
 								</div>
-								<img id="imgurl" style="width: 60px;height: 60px;" class="image-fluid user-image" src="${session.user.displayPicUrl}" alt="">
+								<img id="imgurl" style="width: 60px;height: 60px;" class="image-fluid user-image" src="${session.userVO.displayPicUrl}" alt="">
 							</div>
 							</a> 
 						</div>	
@@ -159,7 +159,7 @@
 					</div>
 					<div class="col-lg-6 travel-right">
 						<div class="single-travel media pb-70">
-						  <image class="image-fluid d-flex  mr-3" src="image/t2.jpg" alt="">
+						  <img class="image-fluid d-flex  mr-3" src="image/t2.jpg" alt="">
 						  <div class="dates">
 						  	<span>20</span>
 						  	<p>Dec</p>
@@ -175,7 +175,7 @@
 						  </div>
 						</div>
 						<div class="single-travel media">
-						  <image class="image-fluid d-flex  mr-3" src="image/t4.jpg" alt="">
+						  <img class="image-fluid d-flex  mr-3" src="image/t4.jpg" alt="">
 						  <div class="dates">
 						  	<span>20</span>
 						  	<p>Dec</p>
@@ -210,7 +210,7 @@
 				</div>					
 				<div class="row">
 					<div class="col-lg-3 col-md-6 single-fashion">
-						<image class="image-fluid" src="image/f1.jpg" alt="">
+						<img class="image-fluid" src="image/f1.jpg" alt="">
 						<p class="date">10 Jan 2018</p>
 						<h4><a href="#">Addiction When Gambling
 						Becomes A Problem</a></h4>
@@ -223,7 +223,7 @@
 						</div>									
 					</div>
 					<div class="col-lg-3 col-md-6 single-fashion">
-						<image class="image-fluid" src="image/f2.jpg" alt="">
+						<img class="image-fluid" src="image/f2.jpg" alt="">
 						<p class="date">10 Jan 2018</p>
 						<h4><a href="#">Addiction When Gambling
 						Becomes A Problem</a></h4>
@@ -236,7 +236,7 @@
 						</div>									
 					</div>
 					<div class="col-lg-3 col-md-6 single-fashion">
-						<image class="image-fluid" src="image/f3.jpg" alt="">
+						<img class="image-fluid" src="image/f3.jpg" alt="">
 						<p class="date">10 Jan 2018</p>
 						<h4><a href="#">Addiction When Gambling
 						Becomes A Problem</a></h4>
@@ -249,7 +249,7 @@
 						</div>									
 					</div>
 					<div class="col-lg-3 col-md-6 single-fashion">
-						<image class="image-fluid" src="image/f4.jpg" alt="">
+						<img class="image-fluid" src="image/f4.jpg" alt="">
 						<p class="date">10 Jan 2018</p>
 						<h4><a href="#">Addiction When Gambling
 						Becomes A Problem</a></h4>

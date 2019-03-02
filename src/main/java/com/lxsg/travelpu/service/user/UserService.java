@@ -1,7 +1,10 @@
 package com.lxsg.travelpu.service.user;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import com.lxsg.travelpu.doman.PostVO;
 import com.lxsg.travelpu.doman.UserVO;
 import com.lxsg.travelpu.pojo.User;
 
@@ -15,12 +18,14 @@ public interface UserService {
 	String checkUser(String username);
 	
 	//登录
-	User getUserByName(UserVO userVO);
+	UserVO getUserByName(UserVO userVO);
 	
 	//注册
-	Integer regist(User user);
+	Integer regist(UserVO userVO);
 	
 	//验证用户名是否存在
 	User isNameExist(String username);
+
+
 
 }

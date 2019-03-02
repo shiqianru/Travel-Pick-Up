@@ -13,19 +13,24 @@
         select u.password from user u where u.username=#{username}
     </select>
     
-    <select id="getUserByName" parameterType="com.lxsg.travelpu.doman.UserVO" resultType="User">
+    <select id="getUserByName" parameterType="com.lxsg.travelpu.doman.UserVO" resultType="com.lxsg.travelpu.doman.UserVO">
     	select * from user u where u.username=#{username}
     </select>
     
     <!-- 新插入行的主键（primary key）；需要包含<selectKey>语句，才会返回主键，否则返回值为null -->
-    <insert id="regist" parameterType="User">
+    <insert id="regist" parameterType="com.lxsg.travelpu.doman.UserVO">
         insert into user (username,password,displayPicUrl) value(#{username},#{password},#{displayPicUrl})
         <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id" >
             SELECT @@IDENTITY AS ID
         </selectKey>
 	</insert>
 	
-	<select id="isNameExist" resultType="User">
+	<select id="isNameExist" resultType="com.lxsg.travelpu.doman.UserVO">
 		select * from user u where u.username=#{username}
 	</select>
+	
+	<select id="getUser" resultType="com.lxsg.travelpu.doman.UserVO" >
+        select * from user u where u.id=#{id}
+    </select>
+
 </mapper>

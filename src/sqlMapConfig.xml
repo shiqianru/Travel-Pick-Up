@@ -14,11 +14,15 @@
     <typeAliases>
     	<!-- <package name="com.lxsg.travelpu.doman.mapper"/> -->
         <typeAlias type="com.lxsg.travelpu.pojo.User" alias="User"/>
+        <typeAlias type="com.lxsg.travelpu.pojo.Attractions" alias="Attractions"/>
+        <typeAlias type="com.lxsg.travelpu.pojo.City" alias="City"/>
+        <typeAlias type="com.lxsg.travelpu.pojo.Post" alias="Post"/>
+        <typeAlias type="com.lxsg.travelpu.pojo.Food" alias="Food"/>
     </typeAliases>
     
     <!-- 映射文件开始 -->
-    <mappers>
+    <!-- <mappers>
         <mapper resource="com/lxsg/travelpu/mapper/User.xml"/>
-    </mappers>
+    </mappers> -->
     <!-- 映射文件结束  -->
 </configuration>

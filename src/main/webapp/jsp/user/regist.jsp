@@ -38,6 +38,15 @@
 		<link rel="stylesheet" href="css/magnific-popup.css">
 		<link rel="stylesheet" href="css/bootstrap.css">
 		<link rel="stylesheet" href="css/main.css">
+		
+	<style type="text/css">
+		img{  
+		    width: auto;  
+		    height: auto;  
+		    max-width: 100%;  
+		    max-height: 100%;     
+		}
+	</style>
 	</head>
 	<body>
 		<!-- Start banner Area -->
@@ -59,13 +68,15 @@
 		<div class="whole-wrap pb-100" align="center">
 			<form id="registForm" action="user/regist.action" method="post"  enctype="multipart/form-data">
 				<div style="width:30%;margin-top: 20px;">
-					<div id="display_div" align="left">
+					<div id="display_div" align="left" style="margin-left: auto;margin-right: auto;position:relative;height: 210px;">
 						<span style="font-weight: bold;font-size: 14px;color: #000;margin-bottom: 20px;">头像</span><br>
-						<label for='my_file' style="width: 100px;height: 70px;">
-					           <div>点击上传文件</div>
+						<label for='my_file' style="width: 100px;height: 70px;margin-top: 50px;margin-right: 20px;background-color: #F7F7F7;color:#CCCCCC;">
+					           <div align="center" style="line-height: 70px;">点击上传文件</div>
 					    </label>
 					    <input type="file" name="myfile" id='my_file' style="display:none;" />
-					    <img src="image/displayAlt.jpg" id="display" height="200px;" alt=""/>
+					    <div style="width: 200px; height: 200px;float: right;position:absolute;top: 0px;right: 0px;">
+					    	<img src="image/displayAlt.jpg" id="display"  alt=""/>
+					    </div>
 					</div>
 					<div id="username_div" align="left">
 						<span style="font-weight: bold;font-size: 14px;color: #000;margin-bottom: 20px;">用户名</span><br>

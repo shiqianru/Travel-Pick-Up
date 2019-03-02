@@ -28,6 +28,7 @@
     <!-- 对于WebLogic,Orion,OC4J此属性应该设置成true -->
     <constant name="struts.dispatcher.parametersWorkaround" value="false" />
     
+
 	
 	<package name="test" extends="struts-default" namespace="/">
                 <!-- 和spring整合后，action将交由spring创建，class的值写bean的id值 -->
@@ -37,5 +38,7 @@
 	</package>
 	
 	<include file="struts/struts-user.xml"/>
+	<include file="struts/struts-attractions.xml"/>
+	<include file="struts/struts-post.xml"/>
 	
 </struts>

@@ -1,9 +1,12 @@
 package com.lxsg.travelpu.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.lxsg.travelpu.dao.UserDao;
+import com.lxsg.travelpu.doman.PostVO;
 import com.lxsg.travelpu.doman.UserVO;
 import com.lxsg.travelpu.pojo.User;
 import com.lxsg.travelpu.service.user.UserService;
@@ -30,14 +33,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User getUserByName(UserVO userVO) {
+	public UserVO getUserByName(UserVO userVO) {
 		return userDao.getUserByName(userVO);
 	}
 
 	@Override
-	public Integer regist(User user) {
+	public Integer regist(UserVO userVO) {
 		// TODO Auto-generated method stub
-		return userDao.regist(user);
+		return userDao.regist(userVO);
 	}
 
 	@Override
@@ -45,5 +48,6 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return userDao.isNameExist(username);
 	}
+
 	
 }
