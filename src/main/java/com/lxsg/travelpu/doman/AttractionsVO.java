@@ -1,5 +1,7 @@
 package com.lxsg.travelpu.doman;
 
+import java.util.List;
+
 public class AttractionsVO {
 	private Integer id;
 	private String viewTitle;
@@ -14,7 +16,21 @@ public class AttractionsVO {
 	private String raiderContent;
 	private Integer basicScore;
 	private Integer foodScore;
+	private String viewImgUrl;
+	public String getViewImgUrl() {
+		return viewImgUrl;
+	}
+	public void setViewImgUrl(String viewImgUrl) {
+		this.viewImgUrl = viewImgUrl;
+	}
+	private List<FoodVO> foodList;
 	
+	public List<FoodVO> getFoodList() {
+		return foodList;
+	}
+	public void setFoodList(List<FoodVO> foodList) {
+		this.foodList = foodList;
+	}
 	public String getViewDiscrib() {
 		return viewDiscrib;
 	}

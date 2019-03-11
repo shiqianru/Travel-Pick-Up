@@ -27,4 +27,9 @@ public interface UserDao {//多个参数需要使用@Param
 
 	//全部帖子
 	List<PostVO> getAllPost();
+
+	int updateUser(UserVO currUserVO);
+
+	List<PostVO> searchPost(String searchContentUser);
+
 }

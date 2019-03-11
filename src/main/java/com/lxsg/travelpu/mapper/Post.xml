@@ -17,6 +17,37 @@
 	   	 	<result  column="displayPicUrl" jdbcType="VARCHAR" property="displayPicUrl"/>
 	 	</association>	
 	</resultMap>
+	
+	<resultMap type="com.lxsg.travelpu.doman.PostVO" id="postMap">
+	    <id column="id" property="id" jdbcType="INTEGER"/>
+	    <result column="postName" property="postName" jdbcType="VARCHAR"/>
+	    <result column="postTime" property="postTime" jdbcType="VARCHAR"/>
+	    <result column="postContent" property="postContent" jdbcType="VARCHAR"/>
+	    <result column="postPoint1" property="postPoint1" jdbcType="VARCHAR"/>
+	    <result column="postPoint2" property="postPoint2" jdbcType="VARCHAR"/>
+	    <result column="postPoint3" property="postPoint3" jdbcType="VARCHAR"/>
+	    <result column="userId" property="userId" jdbcType="INTEGER"/>
+	    
+	    <association property="categoryUrl" javaType="com.lxsg.travelpu.doman.UserVO">
+	   		<id column="ca_id" jdbcType="INTEGER" property="ca_id"/>
+	   	 	<result  column="imgUrl" jdbcType="VARCHAR" property="imgUrl"/>
+			<result column="postId" jdbcType="INTEGER" property="postId"/>
+	 	</association>	
+	</resultMap>
+	
+	<resultMap type="com.lxsg.travelpu.doman.CategoryUrlVO" id="cateMap">
+	    <id column="ca_id" property="ca_id" jdbcType="INTEGER"/>
+	    <result column="imageUrl" property="imageUrl" jdbcType="VARCHAR"/>
+	    <result column="userId" property="userId" jdbcType="INTEGER"/>
+	    <result column="postId" property="postId" jdbcType="INTEGER"/>
+	    <result column="upTime" property="upTime" jdbcType="VARCHAR"/>
+	    
+	    <association property="postVO" javaType="com.lxsg.travelpu.doman.PostVO">
+	   		<id column="id" jdbcType="INTEGER" property="id"/>
+	   	 	<result  column="postName" jdbcType="VARCHAR" property="postName"/>
+	   	 	<result  column="postTime" jdbcType="VARCHAR" property="postTime"/>
+	 	</association>	
+	</resultMap>
     	
 	<insert id="post" parameterType="com.lxsg.travelpu.doman.PostVO" useGeneratedKeys="true" keyProperty="id">
 		insert into post (postName,postTime,postContent,postPoint1,postPoint2,postPoint3) 
@@ -25,11 +56,61 @@
 	
     
 	<select id="getAllPost" resultType="com.lxsg.travelpu.doman.PostVO" parameterType="int" >
-		select * from post p where p.userId=#{id}
+		select * from post p where p.userId=#{id} order by p.id desc
+	</select>
+	<select id="getRecentCate" resultMap="cateMap" parameterType="int" >
+		select * from categoryUrl c,post p where c.postId=p.id and c.userId=#{userId} order by c.upTime desc limit 3
+	</select>
+	<select id="getUserFansCount" resultType="Integer">
+		select count(followerId) from follow where userId=#{userId,jdbcType=INTEGER}
+	</select>
+	<select id="getUserFocusCount" resultType="Integer">
+		select count(followingId) from follow where userId=#{userId,jdbcType=INTEGER}
+	</select>
+	<select id="getFans" resultType="Integer">
+		select followerId from follow where userId=#{userId,jdbcType=INTEGER}
+	</select>
+	<select id="getFocus" resultType="Integer">
+		select followingId from follow where userId=#{userId,jdbcType=INTEGER}
 	</select>
 	
 	<select id="getPostDetail" resultType="com.lxsg.travelpu.doman.PostVO" parameterType="int" >
 		select * from post p where p.id=#{id}
+	</select>
+	<select id="getPostUser" resultType="com.lxsg.travelpu.doman.UserVO">
+		select * from user where id=#{id}
+	</select>
+	<select id="isFocusPostUser" resultType="int">
+		select count(*) from follow where userId=#{0,jdbcType=INTEGER} and followingId=#{1,jdbcType=INTEGER}
+	</select>
+	<insert id="setFollow" parameterType="com.lxsg.travelpu.doman.FollowVO">
+		insert into follow(userId,followerId,followingId) values(#{userId},#{followerId},#{followingId})
+	</insert>
+	<!-- <insert id="setFollowing" parameterType="com.lxsg.travelpu.doman.FollowVO">
+		insert into follow(userId,followerId,followingId) values(#{userId},#{followerId},#{followingId})
+	</insert> -->
+	<delete id="deleteFollower">
+		delete from follow where userId=#{0,jdbcType=INTEGER} and followerId=#{1,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteFollowing">
+		delete from follow where userId=#{0,jdbcType=INTEGER} and followingId=#{1,jdbcType=INTEGER}
+	</delete>
+	<select id="getFollowUserId" resultType="integer">
+		select followingId from follow where userId=#{userId,jdbcType=INTEGER}
+	</select>
+	
+	
+	<select id="getPrePost" resultMap="postMap" parameterType="int" >
+		select * from post p where p.id=(select max(id) from post a where <![CDATA[ a.id<#{id} ]]>)
+	</select>
+	<select id="getPrePostCate" resultType="com.lxsg.travelpu.doman.CategoryUrlVO" parameterType="int">
+		select * from categoryUrl a where a.ca_id=(select b.ca_id from categoryUrl b where b.postId=#{postId} order by b.ca_id desc limit 1)
+	</select>
+	<select id="getAfterPost" resultMap="postMap" parameterType="int" >
+		select * from post p where p.id=(select min(id) from post a where <![CDATA[ a.id>#{id} ]]>)
+	</select>
+	<select id="getAfterPostCate" resultType="com.lxsg.travelpu.doman.CategoryUrlVO" parameterType="int">
+		select * from categoryUrl a where a.ca_id=(select b.ca_id from categoryUrl b where b.postId=#{postId} order by b.ca_id desc limit 1)
 	</select>
 	
 	<update id="updateUserId">
@@ -73,16 +154,53 @@
 		delete from `like` where postId=#{postId,jdbcType=INTEGER} and userId=#{userId,jdbcType=INTEGER}
 	</delete>
 
-	<insert id="commentPost" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.lxsg.travelpu.doman.CommentVO">
+	<insert id="commentPost" useGeneratedKeys="true" keyProperty="c_id" keyColumn="id" parameterType="com.lxsg.travelpu.doman.CommentVO">
 		insert into comment(userId,postId,commentId,commentTime,commentContent) 
 		values(#{userId,jdbcType=INTEGER},#{postId,jdbcType=INTEGER},#{commentId,jdbcType=INTEGER},DATE_FORMAT(NOW(),'%b %d %Y %H:%i:%s'),#{commentContent,jdbcType=VARCHAR})
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="c_id" >
+            SELECT @@IDENTITY AS ID
+        </selectKey>
 	</insert>
+	<select id="getCommentVO" resultType="com.lxsg.travelpu.doman.CommentVO">
+		select * from comment where c_id=#{c_id}
+	</select>
 	
 	<select id="getAllCommentOfPost" resultMap="commentMap" parameterType="int">
 		select * from comment c,user u where u.id=c.userId and c.postId=#{postId}
 	</select>
+	<select id="getAllCommentOfComment" resultMap="commentMap" >
+		select * from comment where postId=#{0,jdbcType=INTEGER} and commentId=#{1,jdbcType=INTEGER}
+	</select>
 	
 	<select id="isUserCommentThisPost" resultType="int">
 		select count(*) from comment c where c.userId=#{1,jdbcType=INTEGER} and c.postId=#{0,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getNewestPost" resultType="com.lxsg.travelpu.doman.PostVO">
+		select * from post order by id desc
+	</select>
+	<select id="getHotPost" resultType="java.util.HashMap">
+		select postId,count(*) as count from `like` group by postId ORDER BY count desc
+	</select>
+	<!--*****************************************************************************  -->
+	<select id="getPointCount" resultType="int">
+		select count(*) from post where postPoint1=#{postPoint1} or postPoint2=#{postPoint2} or postPoint3=#{postPoint3}
+	</select>
+	<select id="getPointPost" resultType="com.lxsg.travelpu.doman.PostVO">
+		select * from post where postPoint1=#{postPoint1} or postPoint2=#{postPoint2} or postPoint3=#{postPoint3}
+	</select>
+	<!--*****************************************************************************  -->
+	
+	<!--*****************************************************************************  -->
+	<update id="updateLikeCount" parameterType="com.lxsg.travelpu.doman.UserVO">
+		update user u set u.likeCount=#{likeCount} where u.id=#{id}
+	</update>
+	<update id="updateCommentCount" parameterType="com.lxsg.travelpu.doman.UserVO">
+		update user u set u.commentCount=#{commentCount} where u.id=#{id}
+	</update>
+	<!--*****************************************************************************  -->
+	
+	<select id="getAlbum" resultType="com.lxsg.travelpu.doman.CategoryUrlVO">
+		select * from categoryUrl where userId=#{userId,jdbcType=INTEGER}
 	</select>
 </mapper>

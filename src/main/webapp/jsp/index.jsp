@@ -53,10 +53,10 @@
 					<s:if test="#session.userVO!=null">
 						<div class="head-bottom-meta d-flex justify-content-between align-items-end col-lg-12">
 							<div class="col-lg-6 flex-row d-flex meta-left no-padding">
-								<p><span class="lnr lnr-heart"></span> 15 Likes</p>
-								<p><span class="lnr lnr-bubble"></span> 02 Comments</p>
+								<p><span class="lnr lnr-heart"></span> ${userVO.likeCount } 赞</p>
+								<p><span class="lnr lnr-bubble"></span> ${userVO.commentCount } 评论</p>
 							</div>
-							<a href="jsp/user/personalEdit.jsp" class="col-lg-6 flex-row d-flex meta-right no-padding justify-content-end">
+							<a href="post/getAllPost.action" class="col-lg-6 flex-row d-flex meta-right no-padding justify-content-end">
 								<div class="col-lg-6 flex-row d-flex meta-right no-padding justify-content-end">
 								<div class="user-meta">
 									<h4 class="text-white"><s:property value="#session.userVO.username"/></h4>
@@ -85,244 +85,133 @@
 				<div class="row d-flex justify-content-center">
 					<div class="menu-content pb-70 col-lg-8">
 						<div class="title text-center">
-							<h1 class="mb-10">Latest News from all categories</h1>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore  et dolore magna aliqua.</p>
+							<h1 class="mb-10">热门推荐</h1>
 						</div>
 					</div>
 				</div>						
 				<div class="active-cat-carusel">
-					<div class="item single-cat">
-						<image src="image/c1.jpg" alt="">
-						<p class="date">10 Jan 2018</p>
-						<h4><a href="#">It S Hurricane Season Visiting Hilton</a></h4>
-					</div>
-					<div class="item single-cat">
-						<image src="image/c2.jpg" alt="">
-						<p class="date">10 Jan 2018</p>
-						<h4><a href="#">What Makes A Hotel Boutique</a></h4>
-					</div>
-					<div class="item single-cat">
-						<image src="image/c3.jpg" alt="">
-						<p class="date">10 Jan 2018</p>
-						<h4><a href="#">Les Houches The Hidden Gem Valley</a></h4>
-					</div>							
-				</div>												
+					<s:if test="#session.indexAttrList!=null && !#session.indexAttrList.isEmpty()">
+						<s:iterator value="#session.indexAttrList" var="attr">
+							<div class="item single-cat">
+								<img width="200px" src="${attr.viewImgUrl }" alt="" style="padding-bottom: 50px;">
+								<h4 style="margin-top: 30px;"><a href="attractions/getAttrDetail.action?viewTitle=${attr.viewTitle }">${attr.viewTitle }</a></h4>
+							</div>
+						</s:iterator>
+					</s:if>
+					<s:else></s:else>
+				</div>
 			</div>	
 		</section>
 		<!-- End category Area -->
 		
 		<!-- Start travel Area -->
-		<section class="travel-area section-gap" id="travel">
-			<div class="container">
-				<div class="row d-flex justify-content-center">
-					<div class="menu-content pb-70 col-lg-8">
-						<div class="title text-center">
-							<h1 class="mb-10">Hot topics from Travel Section</h1>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore  et dolore magna aliqua.</p>
+			<section class="travel-area section-gap" id="travel">
+				<div class="container">
+					<div class="row d-flex justify-content-center">
+						<div class="menu-content pb-70 col-lg-8">
+							<div class="title text-center">
+								<h1 class="mb-10">最新动态</h1>
+							</div>
 						</div>
-					</div>
-				</div>						
-				<div class="row">
-					<div class="col-lg-6 travel-left">
-						<div class="single-travel media pb-70">
-						  <image class="image-fluid d-flex  mr-3" src="image/t1.jpg" alt="">
-						  <div class="dates">
-						  	<span>20</span>
-						  	<p>Dec</p>
-						  </div>
-						  <div class="media-body align-self-center">
-						    <h4 class="mt-0"><a href="#">Addiction When Gambling
-						    Becomes A Problem</a></h4>
-						    <p>inappropriate behavior Lorem ipsum dolor sit amet, consectetur.</p>
-							<div class="meta-bottom d-flex justify-content-between">
-								<p><span class="lnr lnr-heart"></span> 15 Likes</p>
-								<p><span class="lnr lnr-bubble"></span> 02 Comments</p>
-							</div>							 
-						  </div>
+					</div>						
+					<div class="row">
+						<div class="col-lg-6 travel-left">
+							<div class="single-travel media pb-70">
+							  <s:if test="#session.indexPostList[0].homePageImgUrlVO != null">
+                               		 <img height="150px" src="upload/${session.indexPostList[0].homePageImgUrlVO.imageUrl }" alt="">
+                                </s:if>
+                                <s:else>
+                                	 <img height="150px" src="image/hpalt.png" alt="">
+                                </s:else>
+							  <div class="dates">
+							  	<span class="postTime">${session.indexPostList[0].postTime }</span>
+							  </div>
+							  <div class="media-body align-self-center" style="margin-left: 20px;">
+							    <a href="post/getPostDetail.action?postId=${session.indexPostList[0].id }"><h4 class="pb-20">${session.indexPostList[0].postName }</h4></a>
+							    <p>${session.indexPostList[0].postContent }</p>
+								<div class="meta-bottom d-flex justify-content-between">
+									<p class="footer pt-20">
+                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                    <a href="#">${session.indexPostList[0].likeCount } 赞</a>     <i class="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a href="#">${session.indexPostList[0].commentCount } 评论</a>
+                                    </p>
+								</div>							 
+							  </div>
+							</div>
+							<div class="single-travel media">
+							 <s:if test="#session.indexPostList[1].homePageImgUrlVO != null">
+                               		 <img height="150px" src="upload/${session.indexPostList[1].homePageImgUrlVO.imageUrl }" alt="">
+                                </s:if>
+                                <s:else>
+                                	 <img height="150px" src="image/hpalt.png" alt="">
+                                </s:else>
+							  <div class="dates">
+							  	<span class="postTime">${session.indexPostList[1].postTime }</span>
+							  </div>							  
+							  <div class="media-body align-self-center" style="margin-left: 20px;">
+							    <a href="post/getPostDetail.action?postId=${session.indexPostList[1].id }"><h4 class="pb-20">${session.indexPostList[1].postName }</h4></a>
+							    <p>${session.indexPostList[1].postContent }</p>
+								<div class="meta-bottom d-flex justify-content-between">
+									<p class="footer pt-20">
+                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                    <a href="#">${session.indexPostList[1].likeCount } 赞</a>     <i class="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a href="#">${session.indexPostList[1].commentCount } 评论</a>
+                                    </p>
+								</div>							 
+							  </div>
+							</div>														
 						</div>
-						<div class="single-travel media">
-						  <image class="image-fluid d-flex  mr-3" src="image/t3.jpg" alt="">
-						  <div class="dates">
-						  	<span>20</span>
-						  	<p>Dec</p>
-						  </div>							  
-						  <div class="media-body align-self-center">
-						    <h4 class="mt-0"><a href="#">Addiction When Gambling
-						    Becomes A Problem</a></h4>
-						    <p>inappropriate behavior Lorem ipsum dolor sit amet, consectetur.</p>
-							<div class="meta-bottom d-flex justify-content-between">
-								<p><span class="lnr lnr-heart"></span> 15 Likes</p>
-								<p><span class="lnr lnr-bubble"></span> 02 Comments</p>
-							</div>							 
-						  </div>
-						</div>														
-					</div>
-					<div class="col-lg-6 travel-right">
-						<div class="single-travel media pb-70">
-						  <img class="image-fluid d-flex  mr-3" src="image/t2.jpg" alt="">
-						  <div class="dates">
-						  	<span>20</span>
-						  	<p>Dec</p>
-						  </div>							  
-						  <div class="media-body align-self-center">
-						    <h4 class="mt-0"><a href="#">Addiction When Gambling
-						    Becomes A Problem</a></h4>
-						    <p>inappropriate behavior Lorem ipsum dolor sit amet, consectetur.</p>
-							<div class="meta-bottom d-flex justify-content-between">
-								<p><span class="lnr lnr-heart"></span> 15 Likes</p>
-								<p><span class="lnr lnr-bubble"></span> 02 Comments</p>
-							</div>							 
-						  </div>
+						<div class="col-lg-6 travel-right">
+							<div class="single-travel media pb-70">
+							  <s:if test="#session.indexPostList[2].homePageImgUrlVO != null">
+                               		 <img height="150px" src="upload/${session.indexPostList[2].homePageImgUrlVO.imageUrl }" alt="">
+                                </s:if>
+                                <s:else>
+                                	 <img height="150px" src="image/hpalt.png" alt="">
+                                </s:else>
+							  <div class="dates">
+							  	<span class="postTime">${session.indexPostList[2].postTime }</span>
+							  </div>							  
+							  <div class="media-body align-self-center" style="margin-left: 20px;">
+							    <a href="post/getPostDetail.action?postId=${session.indexPostList[2].id }"><h4 class="pb-20">${session.indexPostList[2].postName }</h4></a>
+							    <p>${session.indexPostList[2].postContent }</p>
+								<div class="meta-bottom d-flex justify-content-between">
+									<p class="footer pt-20">
+                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                    <a href="#">${session.indexPostList[2].likeCount } 赞</a>     <i class="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a href="#">${session.indexPostList[2].commentCount } 评论</a>
+                                    </p>
+								</div>							 
+							  </div>
+							</div>
+							<div class="single-travel media">
+								<s:if test="#session.indexPostList[3].homePageImgUrlVO != null">
+                               		 <img height="150px" src="upload/${session.indexPostList[3].homePageImgUrlVO.imageUrl }" alt="">
+                                </s:if>
+                                <s:else>
+                                	 <img height="150px" src="image/hpalt.png" alt="">
+                                </s:else>
+							  <div class="dates">
+							  	<span class="postTime">${session.indexPostList[3].postTime }</span>
+							  </div>							  
+							  <div class="media-body align-self-center" style="margin-left: 20px;">
+							    <a href="post/getPostDetail.action?postId=${session.indexPostList[3].id }"><h4 class="pb-20">${session.indexPostList[3].postName }</h4></a>
+							    <p>${session.indexPostList[3].postContent }</p>
+								<div class="meta-bottom d-flex justify-content-between">
+									<p class="footer pt-20">
+                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                    <a href="#">${session.indexPostList[3].likeCount } 赞</a>     <i class="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a href="#">${session.indexPostList[3].commentCount } 评论</a>
+                                    </p>
+								</div>							 
+							  </div>
+							</div>								
 						</div>
-						<div class="single-travel media">
-						  <img class="image-fluid d-flex  mr-3" src="image/t4.jpg" alt="">
-						  <div class="dates">
-						  	<span>20</span>
-						  	<p>Dec</p>
-						  </div>							  
-						  <div class="media-body align-self-center">
-						    <h4 class="mt-0"><a href="#">Addiction When Gambling
-						    Becomes A Problem</a></h4>
-						    <p>inappropriate behavior Lorem ipsum dolor sit amet, consectetur.</p>
-							<div class="meta-bottom d-flex justify-content-between">
-								<p><span class="lnr lnr-heart"></span> 15 Likes</p>
-								<p><span class="lnr lnr-bubble"></span> 02 Comments</p>
-							</div>							 
-						  </div>
-						</div>								
-					</div>
-					<a href="#" class="primary-btn load-more pbtn-2 text-uppercase mx-auto mt-60">Load More </a>		
-				</div>
-			</div>					
-		</section>
-		<!-- End travel Area -->
-		<div class="tlinks">Collect from <a href="http://www.cssmoban.com/"  title="网站模板">网站模板</a></div>
-		<!-- Start fashion Area -->
-		<section class="fashion-area section-gap" id="fashion">
-			<div class="container">
-				<div class="row d-flex justify-content-center">
-					<div class="menu-content pb-70 col-lg-8">
-						<div class="title text-center">
-							<h1 class="mb-10">Fashion News This Week</h1>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore  et dolore magna aliqua.</p>
-						</div>
+						<a href="post/square.action" class="primary-btn load-more pbtn-2 text-uppercase mx-auto mt-60">更多</a>		
 					</div>
 				</div>					
-				<div class="row">
-					<div class="col-lg-3 col-md-6 single-fashion">
-						<img class="image-fluid" src="image/f1.jpg" alt="">
-						<p class="date">10 Jan 2018</p>
-						<h4><a href="#">Addiction When Gambling
-						Becomes A Problem</a></h4>
-						<p>
-							inappropriate behavior ipsum dolor sit amet, consectetur.
-						</p>
-						<div class="meta-bottom d-flex justify-content-between">
-							<p><span class="lnr lnr-heart"></span> 15 Likes</p>
-							<p><span class="lnr lnr-bubble"></span> 02 Comments</p>
-						</div>									
-					</div>
-					<div class="col-lg-3 col-md-6 single-fashion">
-						<img class="image-fluid" src="image/f2.jpg" alt="">
-						<p class="date">10 Jan 2018</p>
-						<h4><a href="#">Addiction When Gambling
-						Becomes A Problem</a></h4>
-						<p>
-							inappropriate behavior ipsum dolor sit amet, consectetur.
-						</p>
-						<div class="meta-bottom d-flex justify-content-between">
-							<p><span class="lnr lnr-heart"></span> 15 Likes</p>
-							<p><span class="lnr lnr-bubble"></span> 02 Comments</p>
-						</div>									
-					</div>
-					<div class="col-lg-3 col-md-6 single-fashion">
-						<img class="image-fluid" src="image/f3.jpg" alt="">
-						<p class="date">10 Jan 2018</p>
-						<h4><a href="#">Addiction When Gambling
-						Becomes A Problem</a></h4>
-						<p>
-							inappropriate behavior ipsum dolor sit amet, consectetur.
-						</p>
-						<div class="meta-bottom d-flex justify-content-between">
-							<p><span class="lnr lnr-heart"></span> 15 Likes</p>
-							<p><span class="lnr lnr-bubble"></span> 02 Comments</p>
-						</div>									
-					</div>
-					<div class="col-lg-3 col-md-6 single-fashion">
-						<img class="image-fluid" src="image/f4.jpg" alt="">
-						<p class="date">10 Jan 2018</p>
-						<h4><a href="#">Addiction When Gambling
-						Becomes A Problem</a></h4>
-						<p>
-							inappropriate behavior ipsum dolor sit amet, consectetur.
-						</p>
-						<div class="meta-bottom d-flex justify-content-between">
-							<p><span class="lnr lnr-heart"></span> 15 Likes</p>
-							<p><span class="lnr lnr-bubble"></span> 02 Comments</p>
-						</div>									
-					</div>	
-					<a href="#" class="primary-btn load-more pbtn-2 text-uppercase mx-auto mt-60">Load More </a>						
-				</div>
-			</div>	
-		</section>
-		<!-- End fashion Area -->
+			</section>
+			<!-- End travel Area -->
+
+		<div class="tlinks">Collect from <a href="http://www.cssmoban.com/"  title="网站模板">网站模板</a></div>
 		
-		<!-- Start team Area -->
-		<section class="team-area section-gap" id="team">
-			<div class="container">
-				<div class="row d-flex justify-content-center">
-					<div class="menu-content pb-70 col-lg-8">
-						<div class="title text-center">
-							<h1 class="mb-10">About Blogger Team</h1>
-							<p>Who are in extremely love with eco friendly system.</p>
-						</div>
-					</div>
-				</div>						
-				<div class="row justify-content-center d-flex align-items-center">
-					<div class="col-lg-6 team-left">
-						<p>
-							inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards especially in the workplace. That’s why it’s crucial that, as women, our behavior on the job is beyond reproach. inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards especially in the workplace. That’s why it’s crucial that.
-						</p>
-						<p>
-							inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards especially in the workplace. That’s why it’s crucial that, as women.
-						</p>
-					</div>
-					<div class="col-lg-6 team-right d-flex justify-content-center">
-						<div class="row active-team-carusel">
-							<div class="single-team">
-							    <div class="thumb">
-							        <image class="image-fluid" src="image/team1.jpg" alt="">
-							        <div class="align-items-center justify-content-center d-flex">
-										<a href="#"><i class="fa fa-facebook"></i></a>
-										<a href="#"><i class="fa fa-twitter"></i></a>
-										<a href="#"><i class="fa fa-linkedin"></i></a>
-							        </div>
-							    </div>
-							    <div class="meta-text mt-30 text-center">
-								    <h4>Dora Walker</h4>
-								    <p>Senior Core Developer</p>									    	
-							    </div>
-							</div>
-							<div class="single-team">
-							    <div class="thumb">
-							        <image class="image-fluid" src="image/team2.jpg" alt="">
-							        <div class="align-items-center justify-content-center d-flex">
-										<a href="#"><i class="fa fa-facebook"></i></a>
-										<a href="#"><i class="fa fa-twitter"></i></a>
-										<a href="#"><i class="fa fa-linkedin"></i></a>
-							        </div>
-							    </div>
-							    <div class="meta-text mt-30 text-center">
-								    <h4>Lena Keller</h4>
-								    <p>Creative Content Developer</p>			    	
-							    </div>
-							</div>													
-						</div>
-					</div>
-				</div>
-			</div>	
-		</section>
-		<!-- End team Area -->
+		
 		
 		<s:include value="/jsp/footer.jsp"></s:include>		
 
@@ -337,13 +226,38 @@
 		<script src="js/main.js"></script>	
 		
 	</body>
-		<%-- <script type="text/javascript">
-			$(window).load(function(){
+		<script type="text/javascript">
+	    $(window).load(function(){
+	    	$("#logout").click(function(){
+				window.location.href="http://localhost:8080/travelpu/user/logout.action"
+			})
+			
+			
+	    	var content=$(".postContent");
+	    	$(".postContent").each(function(){
+	    	   if($(this).text().length>180){
+	    		   $(this).text($(this).text().substring(0,180)+"...");
+		       	}
+	    	});
+	    	
+	    	$('.postTime').each(function(){
+	     	   var postTime=$(this).text().split(' ');
+	     	   $(this).text("");
+	     	   $(this).append(postTime[1],"<br/>",postTime[0]);
+	    	})
+	    	
+	    	
+	    	$("#logout").click(function(){
+				window.location.href="http://localhost:8080/travelpu/user/logout.action"
+			})
+	    })
+	   
+			/* $(window).load(function(){
 				var imgurl = "${session.user.displayPicUrl}";
 				if(imgurl!=null && imgurl!=""){
 					alert(imgurl);
 					$("#imgurl").Attr("src",imgurl);
 				}
-			});
-		</script> --%>
+			}); */
+		</script>
 </html>

@@ -9,8 +9,23 @@ public class City {
 	private String cityDiscrib;
 	private List<Attractions> attrList;
 	private String cityRaiders;
+	private Integer cityScore;
+	private String cityPic;
+	
+	public String getCityPic() {
+		return cityPic;
+	}
+	public void setCityPic(String cityPic) {
+		this.cityPic = cityPic;
+	}
 	public Integer getId() {
 		return id;
+	}
+	public Integer getCityScore() {
+		return cityScore;
+	}
+	public void setCityScore(Integer cityScore) {
+		this.cityScore = cityScore;
 	}
 	public void setId(Integer id) {
 		this.id = id;

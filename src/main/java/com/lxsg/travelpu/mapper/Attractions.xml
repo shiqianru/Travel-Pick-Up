@@ -6,22 +6,76 @@
     
     <!--id应该是接口中的方法，结果类型如没有配置别名则应该使用全名称 -->
     <select id="getRecommend" resultType="com.lxsg.travelpu.doman.AttractionsVO">
-        select * from attractions a order by a.basicScore desc;
+        select * from attractions a order by a.basicScore desc limit 6;
+    </select>
+    <select id="getSubAttrs" resultType="com.lxsg.travelpu.doman.AttractionsVO">
+    	select * from attractions a order by a.basicScore desc limit #{0},#{1}
     </select>
     
 	<select id="getAttrDetail" resultType="com.lxsg.travelpu.doman.AttractionsVO">
 		select * from attractions a where a.viewTitle=#{viewTitle}
 	</select>
+	<select id="getAttr" resultType="com.lxsg.travelpu.doman.AttractionsVO">
+		select * from attractions a where a.id=#{id}
+	</select>
 	
 	<select id="getAllCitys" resultType="com.lxsg.travelpu.doman.CityVO">
 		select * from city
 	</select>
-	
 	<select id="getAllFoods" resultType="com.lxsg.travelpu.doman.FoodVO">
 		select * from food
+	</select>
+	<select id="getAllAttrs" resultType="com.lxsg.travelpu.doman.AttractionsVO">
+		select * from attractions
 	</select>
 	
 	<select id="getAttrOfCity" resultType="com.lxsg.travelpu.doman.AttractionsVO">
 		select * from attractions a where a.cityId=#{id}
+	</select>
+	<select id="getFoodOfAttr" resultType="com.lxsg.travelpu.doman.FoodVO">
+		select * from food where attractionId=#{attractionId}
+	</select>
+	<select id="getFoodDetail" resultType="com.lxsg.travelpu.doman.FoodVO">
+		select * from food where id=#{id}
+	</select>
+	<select id="getCityDetail" resultType="com.lxsg.travelpu.doman.CityVO">
+		select * from city where id=#{id}
+	</select>
+	
+	<!-- **************************************************************** -->
+	<select id="getShowCity" resultType="com.lxsg.travelpu.doman.CityVO">
+		select * from city c order by c.cityScore desc,c.id asc limit 9;
+	</select>
+	<select id="getShowFood" resultType="com.lxsg.travelpu.doman.FoodVO">
+		select * from food f order by f.foodScore desc,f.id asc limit 9;
+	</select>
+	<select id="getShowAttr" resultType="com.lxsg.travelpu.doman.AttractionsVO">
+		select * from attractions a order by a.basicScore desc,a.id asc limit 9;
+	</select>
+	<!-- **************************************************************** -->
+	
+	<!-- search************************************************* -->
+	<select id="searchCity" resultType="com.lxsg.travelpu.doman.CityVO">
+		select * from city c 
+		where c.cityName like concat('%',#{searchContent},'%') or c.cityDiscrib like concat('%',#{searchContent},'%')
+	</select>
+	<!-- search************************************************* -->
+	
+	<select id="sortNew" resultType="com.lxsg.travelpu.doman.AttractionsVO">
+		select * from attractions order by id desc
+	</select>
+	<select id="sortHot" resultType="java.util.HashMap">
+		select sum(a.basicScore+a.foodScore) as score,a.id as h_id 
+		from attractions a group by a.id order by score desc
+	</select>
+	
+	
+	<select id="getPointAttr"  resultType="com.lxsg.travelpu.doman.AttractionsVO">
+		select * from attractions 
+		where viewPoint1=#{viewPoint1} or viewPoint2=#{viewPoint2} or viewPoint3=#{viewPoint3} or viewPoint4=#{viewPoint4} or viewPoint5=#{viewPoint5}
+	</select>
+	
+	<select id="getRelaPost" resultType="com.lxsg.travelpu.doman.PostVO">
+		select * from post where postPoint1=#{postPoint1} or postPoint2=#{postPoint2} or postPoint3=#{postPoint3}
 	</select>
 </mapper>

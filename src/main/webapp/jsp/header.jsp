@@ -17,31 +17,30 @@
 					    <ul class="navbar-nav">
 							<li><a href="#home">首页</a></li>
 							<li><a href="attractions/getRecommend.action">推荐</a></li>
-							<li><a href="#travel">广场</a></li>
-							<li><a href="#fashion">fashion</a></li>
+							<li class="dropdown">
+								<a data-toggle="dropdown" class="dropdown-toggle">广场</a>
+								<div class="dropdown-menu">
+						        	<a class="dropdown-item" href="post/square.action">全部</a>
+						        	<a class="dropdown-item" href="post/friendSquare.action">好友圈</a>
+						      	</div>
+							</li>
 							<li class="dropdown">
 								<a class="dropdown-toggle" data-toggle="dropdown">我的</a>
 								<div class="dropdown-menu">
-						        <a class="dropdown-item" href="post/getAllPost.action">主页</a>
-						        <a class="dropdown-item" href="jsp/user/post.jsp">发帖</a>
-						        <a class="dropdown-item" href="category.html">相册</a>
-						      </div>
+						        	<a class="dropdown-item" href="post/getAllPost.action">主页</a>
+						        	<a class="dropdown-item" href="jsp/user/post.jsp">发帖</a>
+						        	<a class="dropdown-item" href="post/getAlbum.action">相册</a>
+						        	<a class="dropdown-item" href="user/editInformation.action">编辑资料</a>
+						        	<a class="dropdown-item" href="jsp/user/changePassword.jsp">修改密码</a>
+						      	</div>
 							</li>
 							<!-- Dropdown -->
-						    <li class="dropdown">
-						      <a class="dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-						        Pages
-						      </a>
-						      <div class="dropdown-menu">
-						        <a class="dropdown-item" href="single.html">Single</a>
-						        <a class="dropdown-item" href="category.html">Category</a>
-						        <a class="dropdown-item" href="search.html">Search</a>
-						        <a class="dropdown-item" href="archive.html">Archive</a>
-						        <a class="dropdown-item" href="generic.html">Generic</a>
-						        <a class="dropdown-item" href="elements.html">Elements</a>
-						      </div>
-						    </li>
-						    <li><a href="jsp/user/login.jsp" style="color: #11C2EE;">登录</a></li>	
+							<s:if test="#session.userVO!=null">
+								<li><a href="javascript:;" style="color: #D5D5D5;">已登录</a><span style="cursor:pointer;" id="logout" style="color: #11C2EE;">[注销]</span></li>
+							</s:if>
+							<s:else>
+								<li><a href="jsp/user/login.jsp" style="color: #11C2EE;">登录</a></li>
+							</s:else>
 						    <li><a href="jsp/user/regist.jsp" style="color: #11C2EE;">注册</a></li>							
 					    </ul>
 					  </div>						

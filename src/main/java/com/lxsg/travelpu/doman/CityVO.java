@@ -10,6 +10,21 @@ public class CityVO {
 	private String cityDiscrib;
 	private List<Attractions> attrList;
 	private String cityRaiders;
+	private Integer cityScore;
+	private String cityPic;
+	
+	public String getCityPic() {
+		return cityPic;
+	}
+	public void setCityPic(String cityPic) {
+		this.cityPic = cityPic;
+	}
+	public Integer getCityScore() {
+		return cityScore;
+	}
+	public void setCityScore(Integer cityScore) {
+		this.cityScore = cityScore;
+	}
 	public Integer getId() {
 		return id;
 	}

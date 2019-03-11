@@ -49,5 +49,17 @@ public class UserServiceImpl implements UserService {
 		return userDao.isNameExist(username);
 	}
 
+	@Override
+	public int updateUser(UserVO currUserVO) {
+		// TODO Auto-generated method stub
+		return userDao.updateUser(currUserVO);
+	}
+
+	@Override
+	public List<PostVO> searchPost(String searchContentUser) {
+		// TODO Auto-generated method stub
+		return userDao.searchPost(searchContentUser);
+	}
+
 	
 }

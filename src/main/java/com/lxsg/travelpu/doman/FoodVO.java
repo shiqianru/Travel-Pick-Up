@@ -8,6 +8,13 @@ public class FoodVO {
 	private String foodName;
 	private String foodImgUrl;
 	private String foodDiscrib;
+	private Integer foodScore;
+	public Integer getFoodScore() {
+		return foodScore;
+	}
+	public void setFoodScore(Integer foodScore) {
+		this.foodScore = foodScore;
+	}
 	private Attractions attraction;
 	public Integer getId() {
 		return id;

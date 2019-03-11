@@ -38,6 +38,49 @@
 		
 		<action name="setFileName" class="com.lxsg.travelpu.controller.user.UserAction" method="setFileName"></action>
 	
+		<action name="editInformation" class="com.lxsg.travelpu.controller.user.UserAction" method="editInformation">
+			<interceptor-ref name="CommonInterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="success">/jsp/user/editInformation.jsp</result>
+			<result name="loginFail">/jsp/user/login.jsp</result>
+		</action>
+		<action name="editSubmit" class="com.lxsg.travelpu.controller.user.UserAction" method="editSubmit">
+			<interceptor-ref name="defaultStack">
+                <param name="fileUpload.maximumSize">500000000</param>
+                <param name="allowedTypes">
+				      image/bmp,image/png,image/gif,image/jpeg,image/jpg,
+				      image/pjpeg ,image/bmp, image/gif, image/x-png,
+				</param>
+                <param name="fileUpload.allowedExtensions">.jpg,.png</param>
+            </interceptor-ref>
+            <interceptor-ref name="CommonInterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="success" type="chain">getAllPost</result>
+			<result name="error" type="chain">editInformation</result>
+		</action>
+		
+		<action name="isPwdCorrect" class="com.lxsg.travelpu.controller.user.UserAction" method="isPwdCorrect">
+			<interceptor-ref name="CommonInterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="loginFail">/jsp/user/login.jsp</result>
+		</action>
+		<action name="modifyPwd" class="com.lxsg.travelpu.controller.user.UserAction" method="modifyPwd">
+			<interceptor-ref name="CommonInterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="success" type="chain">getAllPost</result>
+			<result name="error">/jsp/user/changePassword.jsp</result>
+		</action>
+		
+		<action name="searchPost" class="com.lxsg.travelpu.controller.user.UserAction" method="searchPost">
+			<interceptor-ref name="CommonInterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="success">/jsp/user/searchUserPost.jsp</result>
+			<result name="error">/jsp/user/homePage.jsp</result>
+		</action>
+		
+		<action name="logout" class="com.lxsg.travelpu.controller.user.UserAction" method="logout">
+			<result name="success">/jsp/index.jsp</result>
+		</action>
 		
 	</package>
 	

@@ -28,6 +28,7 @@ import com.lxsg.travelpu.doman.CategoryUrlVO;
 import com.lxsg.travelpu.doman.PostVO;
 import com.lxsg.travelpu.doman.UserVO;
 import com.lxsg.travelpu.pojo.User;
+import com.lxsg.travelpu.service.user.PostService;
 import com.lxsg.travelpu.service.user.UserService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -42,8 +43,35 @@ public class UserAction extends ActionSupport{
 	private String SUCCESS = ConstantClassField.SUCCESS;
 	private String ERROR = ConstantClassField.ERROR;
 	
+	private String searchContentUser;
+	
+	public String getSearchContentUser() {
+		return searchContentUser;
+	}
+
+	public void setSearchContentUser(String searchContentUser) {
+		this.searchContentUser = searchContentUser;
+	}
 	private String username;
 	private String password;
+	private String introduce;
+	private String oriPwd;
+
+	public String getOriPwd() {
+		return oriPwd;
+	}
+
+	public void setOriPwd(String oriPwd) {
+		this.oriPwd = oriPwd;
+	}
+
+	public String getIntroduce() {
+		return introduce;
+	}
+
+	public void setIntroduce(String introduce) {
+		this.introduce = introduce;
+	}
 
 	public String getUsername() {
 		return username;
@@ -71,33 +99,33 @@ public class UserAction extends ActionSupport{
 		return ERROR;
 	}
 	//文件上传
-			private File myfile; //得到上传的文件
-		    private String myfileContentType; //得到文件的类型
-		    private String myfileFileName; //得到文件的名称
+	private File myfile; //得到上传的文件
+    private String myfileContentType; //得到文件的类型
+    private String myfileFileName; //得到文件的名称
 
-			public File getMyfile() {
-				return myfile;
-			}
+	public File getMyfile() {
+		return myfile;
+	}
 
-			public void setMyfile(File myfile) {
-				this.myfile = myfile;
-			}
+	public void setMyfile(File myfile) {
+		this.myfile = myfile;
+	}
 
-			public String getMyfileContentType() {
-				return myfileContentType;
-			}
+	public String getMyfileContentType() {
+		return myfileContentType;
+	}
 
-			public void setMyfileContentType(String myfileContentType) {
-				this.myfileContentType = myfileContentType;
-			}
+	public void setMyfileContentType(String myfileContentType) {
+		this.myfileContentType = myfileContentType;
+	}
 
-			public String getMyfileFileName() {
-				return myfileFileName;
-			}
+	public String getMyfileFileName() {
+		return myfileFileName;
+	}
 
-			public void setMyfileFileName(String myfileFileName) {
-				this.myfileFileName = myfileFileName;
-			}
+	public void setMyfileFileName(String myfileFileName) {
+		this.myfileFileName = myfileFileName;
+	}
 	
 	/**
 	 * 登录时验证用户名密码
@@ -165,6 +193,15 @@ public class UserAction extends ActionSupport{
     }
 	
 	/**
+	 * 注销
+	 */
+	@RequestMapping("/logout")
+	public String logout(){
+		ActionContext.getContext().getSession().remove("userVO");
+		return SUCCESS;
+	}
+	
+	/**
 	 * 上传头像
 	 * @return
 	 */
@@ -215,7 +252,82 @@ public class UserAction extends ActionSupport{
 		return null;
 	}
 	
+	@RequestMapping("/editInformation")
+	public String editInformation(){
+		UserVO currUserVO=(UserVO) ActionContext.getContext().getSession().get("userVO");
+		
+		return SUCCESS;
+	}
 	
+	@RequestMapping("/editSubmit")
+	public String editSubmit() throws IOException{
+		UserVO currUserVO=(UserVO) ActionContext.getContext().getSession().get("userVO");
+		if(myfile!=null){
+			uploadDisplayPic();
+			currUserVO.setDisplayPicUrl("upload/"+myfileFileName);
+			System.out.println(myfileFileName);
+		}
+		if(username!=null && username!=""){
+			currUserVO.setUsername(username);
+		}
+		if(introduce!=null && introduce!=""){
+			currUserVO.setIntroduce(introduce);
+		}
+		
+		int result=userService.updateUser(currUserVO);
+		if(result>0){
+			ActionContext.getContext().getSession().put("errormsg", "修改成功！");
+			return SUCCESS;
+		}else{
+			ActionContext.getContext().getSession().put("errormsg", "修改失败！");
+			return ERROR;
+		}
+		
+	}
 	
+	@RequestMapping("/isPwdCorrect")
+	public String isPwdCorrect(){
+		HttpServletResponse response = ServletActionContext.getResponse();
+        response.setCharacterEncoding("UTF-8");
+        
+		UserVO currUserVO=(UserVO) ActionContext.getContext().getSession().get("userVO");
+		String userPwd=userService.checkUser(currUserVO.getUsername());
+		if(oriPwd.equals(userPwd)){
+			try {
+				response.getWriter().write("1");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else{
+			try {
+				response.getWriter().write("0");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
+	@RequestMapping("/modifyPwd")
+	public String modifyPwd(){
+		UserVO currUserVO=(UserVO) ActionContext.getContext().getSession().get("userVO");
+		currUserVO.setPassword(password);
+		int result=userService.updateUser(currUserVO);
+		if(result>0){
+			ActionContext.getContext().getSession().put("errormsg", "修改成功！");
+			return SUCCESS;
+		}
+		ActionContext.getContext().getSession().put("errormsg", "修改失败！");
+		return ERROR;
+	}
+	
+	@RequestMapping("/searchPost")
+	public String searchPost(){
+		List<PostVO> resultList=userService.searchPost(searchContentUser);
+		ActionContext.getContext().getSession().put("searchPostResult", resultList);
+		return SUCCESS;
+	}
 	
 }

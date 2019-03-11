@@ -1,5 +1,7 @@
 package com.lxsg.travelpu.doman;
 
+import java.util.List;
+
 public class CommentVO {
 	private Integer c_id;
 	private Integer userId;
@@ -11,7 +13,14 @@ public class CommentVO {
 	private UserVO user;
 	private PostVO post;
 	private CommentVO comment;
+	private List<CommentVO> commCommentList;
 	
+	public List<CommentVO> getCommCommentList() {
+		return commCommentList;
+	}
+	public void setCommCommentList(List<CommentVO> commCommentList) {
+		this.commCommentList = commCommentList;
+	}
 	public String getCommentContent() {
 		return commentContent;
 	}

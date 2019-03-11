@@ -16,7 +16,35 @@ public class PostVO {
 	private Integer userId;
 	private CategoryUrlVO homePageImgUrlVO;
 	private List<CategoryUrlVO> categoryUrl;
+	private List<LikeVO> likeList;
+	private int likeCount;
+	private List<CommentVO> commentList;
+	private int commentCount;
 
+	public List<CommentVO> getCommentList() {
+		return commentList;
+	}
+	public void setCommentList(List<CommentVO> commentList) {
+		this.commentList = commentList;
+	}
+	public int getCommentCount() {
+		return commentCount;
+	}
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
+	public List<LikeVO> getLikeList() {
+		return likeList;
+	}
+	public void setLikeList(List<LikeVO> likeList) {
+		this.likeList = likeList;
+	}
+	public int getLikeCount() {
+		return likeCount;
+	}
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
 	public CategoryUrlVO getHomePageImgUrlVO() {
 		return homePageImgUrlVO;
 	}

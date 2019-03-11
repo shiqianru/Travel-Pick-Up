@@ -62,58 +62,23 @@
 			<section class="fashion-area section-gap" id="fashion">
 				<div class="container">					
 					<div class="row">
-						<div class="col-lg-3 col-md-6 single-fashion">
-							<img class="img-fluid" src="image/f1.jpg" alt="">
-							<p class="date">10 Jan 2018</p>
-							<h4><a href="#">Addiction When Gambling
-							Becomes A Problem</a></h4>
-							<p>
-								inappropriate behavior ipsum dolor sit amet, consectetur.
-							</p>
-							<div class="meta-bottom d-flex justify-content-between">
-								<p><span class="lnr lnr-heart"></span> 15 Likes</p>
-								<p><span class="lnr lnr-bubble"></span> 02 Comments</p>
-							</div>									
-						</div>
-						<div class="col-lg-3 col-md-6 single-fashion">
-							<image class="img-fluid" src="image/f2.jpg" alt="">
-							<p class="date">10 Jan 2018</p>
-							<h4><a href="#">Addiction When Gambling
-							Becomes A Problem</a></h4>
-							<p>
-								inappropriate behavior ipsum dolor sit amet, consectetur.
-							</p>
-							<div class="meta-bottom d-flex justify-content-between">
-								<p><span class="lnr lnr-heart"></span> 15 Likes</p>
-								<p><span class="lnr lnr-bubble"></span> 02 Comments</p>
-							</div>									
-						</div>
-						<div class="col-lg-3 col-md-6 single-fashion">
-							<image class="img-fluid" src="image/f3.jpg" alt="">
-							<p class="date">10 Jan 2018</p>
-							<h4><a href="#">Addiction When Gambling
-							Becomes A Problem</a></h4>
-							<p>
-								inappropriate behavior ipsum dolor sit amet, consectetur.
-							</p>
-							<div class="meta-bottom d-flex justify-content-between">
-								<p><span class="lnr lnr-heart"></span> 15 Likes</p>
-								<p><span class="lnr lnr-bubble"></span> 02 Comments</p>
-							</div>									
-						</div>
-						<div class="col-lg-3 col-md-6 single-fashion">
-							<image class="img-fluid" src="image/f4.jpg" alt="">
-							<p class="date">10 Jan 2018</p>
-							<h4><a href="#">Addiction When Gambling
-							Becomes A Problem</a></h4>
-							<p>
-								inappropriate behavior ipsum dolor sit amet, consectetur.
-							</p>
-							<div class="meta-bottom d-flex justify-content-between">
-								<p><span class="lnr lnr-heart"></span> 15 Likes</p>
-								<p><span class="lnr lnr-bubble"></span> 02 Comments</p>
-							</div>									
-						</div>						
+						<s:if test="#session.relaPostList!=null && !#session.relaPostList.isEmpty()">
+							<s:iterator value="#session.relaPostList" var="post">
+								<div class="col-lg-3 col-md-6 single-fashion" style="width: 150px;">
+										<s:if test="#post.homePageImgUrlVO != null">
+			                           		 <img height="80px" class="img-fluid" src="upload/${post.homePageImgUrlVO.imageUrl}" alt="">
+			                            </s:if>
+			                            <s:else>
+			                            	 <img height="80px" src="image/hpalt.png" alt="">
+			                            </s:else>
+									
+									<h4><a href="post/getPostDetail.action?postId=${post.id }">${post.postName }</a></h4>
+									<p>
+										${post.postName }
+									</p>
+								</div>
+							</s:iterator>
+						</s:if>
 					</div>
 				</div>	
 			</section>
@@ -135,7 +100,9 @@
 						</div>
 						<div class="col-lg-12" style="margin-top: 30px;">
 							<span style="color:#000;"><b>美食：</b></span>
-							${session.attrDetail.foodContent }
+							<s:iterator value="#session.attrDetail.foodList" var="food">
+								<a href="attractions/getFoodDetail.action?id=${food.id }">${food.foodName }</a>
+							</s:iterator>
 						</div>
 					</div>
 				</div>
@@ -158,6 +125,22 @@
 	<script type="text/javascript">
 		$(window).load(function(){
 			/* alert($(".col-lg-12").html()); */
+			var content=$(".postContent");
+	    	$(".postContent").each(function(){
+	    	   if($(this).text().length>180){
+	    		   $(this).text($(this).text().substring(0,180)+"...");
+		       	}
+	    	});
+	    	
+	    	$('.postTime').each(function(){
+	     	   var postTime=$(this).text().split(' ');
+	     	   $(this).text("");
+	     	   $(this).append(postTime[1],"<br/>",postTime[0]);
+	    	})
+	    	
+			$("#logout").click(function(){
+				window.location.href="http://localhost:8080/travelpu/user/logout.action"
+			})
 		})
 	</script>
 </html>

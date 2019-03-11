@@ -1,6 +1,9 @@
+<%@page import="java.io.Console"%>
+<%@page import="java.awt.ItemSelectable"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%! Integer current=1;%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zxx" class="no-js">
 <head>	
@@ -64,21 +67,25 @@
                     <div class="col-lg-8">
                         <div id="imaginary_container"> 
                             <div class="input-group stylish-input-group">
-                                <input type="text" class="form-control"  placeholder="搜索" onfocus="this.placeholder = ''" onblur="this.placeholder = '搜索'" required="">
+                           		<input id="scontent" name="scontent" type="text" class="form-control"  placeholder="搜索" onfocus="this.placeholder = ''" onblur="this.placeholder = '搜索'" required="">
                                 <span class="input-group-addon">
-                                    <button type="submit">
+                                    <button id="search" type="submit">
                                         <span class="lnr lnr-magnifier"></span>
                                     </button>  
                                 </span>
                             </div>
                         </div> 
-                        <p class="mt-20 text-center text-white">169 results found for “Addictionwhen gambling”</p>
                     </div>
                 </div>
             </div>  
         </section>
         <!-- End top-section Area -->
-
+        
+		<!-- search form -->
+		 <form id="searchForm" action="attractions/search.action" method="post">
+			     <input id="searchContent" type="hidden" name="searchContent">                       	
+		 </form>
+		<!-- search form -->
 
 <!-- Start post Area -->
 <div class="post-wrapper pt-100">
@@ -123,140 +130,114 @@
 	                            </div>
 	                        </div>
 	                    </s:iterator>
+	                    <s:if test="#session.subList!=null && !#session.subList.isEmpty()">
+	                    	<s:iterator value="#session.subList" var="attraction">
+		                    	<div class="single-list flex-row d-flex" style="width: 700px;height: 250px;"><!-- 一个单元 -->
+		                            <div class="thumb" style="width: 30%;height: 100%;">
+		                                <img src="image/asset/l1.jpg" alt="" />
+		                            </div>
+		                            <div class="detail" style="width: 70%;height: 100%;padding-bottom: 20px;">
+		                            	<div style="width: 100%;height: 20%;">
+		                               		<a href="attractions/getAttrDetail.action?viewTitle=${attraction.viewTitle }"><h4 class="pb-20">${attraction.viewTitle }</h4></a>
+		                                </div>
+		                                <div style="width: 100%;height:50%;">
+		                                	<p class="viewDiscrib">
+			                                     ${attraction.viewDiscrib}
+			                                </p>
+		                                </div>
+		                                
+		                                <div id="view-label"  style="width: 100%;height: 30%;">
+		                                	<s:if test="#attraction.viewPoint1 != null">
+		                                		<div style="width: 90px;height: 40px;border: solid 1px #D5D5D5;float: left;margin-right: 10px;line-height:40px;text-align: center;">${attraction.viewPoint1 }</div>
+		                                	</s:if>
+		                                	<s:if test="#attraction.viewPoint2 != null">
+		                                		<div style="width: 90px;height: 40px;border: solid 1px #D5D5D5;float: left;margin-right: 10px;line-height:40px;text-align: center;">${attraction.viewPoint2 }</div>
+		                                	</s:if>
+		                                	<s:if test="#attraction.viewPoint3 != null">
+		                                		<div style="width: 90px;height: 40px;border: solid 1px #D5D5D5;float: left;margin-right: 10px;line-height:40px;text-align: center;">${attraction.viewPoint3 }</div>
+		                                	</s:if>
+		                                	<s:if test="#attraction.viewPoint4 != null">
+		                                		<div style="width: 90px;height: 40px;border: solid 1px #D5D5D5;float: left;margin-right: 10px;line-height:40px;text-align: center;">${attraction.viewPoint4 }</div>
+		                                	</s:if>
+		                                	<s:if test="#attraction.viewPoint5 != null">
+		                                		<div style="width: 90px;height: 40px;border: solid 1px #D5D5D5;float: left;margin-right: 10px;line-height:40px;text-align: center;">${attraction.viewPoint5 }</div>
+		                                	</s:if>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </s:iterator>
+	                    </s:if>
                         <div class="justify-content-center d-flex">
-                            <a class="text-uppercase primary-btn loadmore-btn mt-40 mb-60" href="#"> Load More Post</a>
+                        	<div style="display: none;" id="currentPage">${session.currentPage }</div>
+                            <a id="loadmore" class="text-uppercase primary-btn loadmore-btn mt-40 mb-60" href="javascript:;"> Load More Post</a>
                         </div>                                                                     
                     </div>
-                      
+                      <span id="current" style="display:none;"></span>
                 </div>
                 <div class="col-lg-4 sidebar-area">
-                    <div class="single_widget search_widget">
-                        <div id="imaginary_container"> 
-                            <div class="input-group stylish-input-group">
-                                <input type="text" class="form-control"  placeholder="Search" >
-                                <span class="input-group-addon">
-                                    <button type="submit">
-                                        <span class="lnr lnr-magnifier"></span>
-                                    </button>  
-                                </span>
-                            </div>
-                        </div> 
+                	<div class="single_widget tag_widget">
+                        <h4 class="text-uppercase pb-20">筛选</h4>
+                        <ul>
+                            <li>
+                                <a href="attractions/getRecommend.action">默认</a>
+                            </li>
+                            <li>
+                                <a id="sortNew" href="attractions/sortNew.action">最新</a>
+                            </li>
+                            <li>
+                                <a href="attractions/sortHot.action">最热</a>
+                            </li>
+                        </ul>
                     </div>
-
                     <div class="single_widget tag_widget">
                     	<div id="citySpan" style="width: 100%;height: 50%;">
                     		<div class="citySpan" style="width: 100%;height: 20%;">
-                    			<h4 class="text-uppercase pb-20">城市(<a href="attractions/getAllSigns.action">更多</a>)</h4>
+                    			<h4 class="text-uppercase pb-20">城市<a href="attractions/getAllSigns.action#citySign" style="font-size: 12px;">more</a></h4>
                     		</div>
                     		<div style="width: 100%;height: 80%;">
 	                    		<ul>
-		                            <li><a href="#">北京</a></li>
-		                            <li><a href="#">上海</a></li>
-		                            <li><a href="#">杭州</a></li>
-		                            <li><a href="#">西藏</a></li>
-		                            <li><a href="#">武汉</a></li>
-		                            <li><a href="#">湖南</a></li>
-		                            <li><a href="#">台湾</a></li>
-		                            <li><a href="#">新疆</a></li>
-		                            <li><a href="#">成都</a></li>
+	                    			<s:if test="#session.cityShowList!=null">
+	                    				<s:iterator value="#session.cityShowList" var="city">
+	                    					<li><a href="attractions/getAttrOfCity.action?id=${city.id }">${city.cityName }</a></li>
+	                    				</s:iterator>
+	                    			</s:if>
 		                        </ul>
                     		</div>
 	                       
                     	</div>
                         <div id="attractionSpan" style="width: 100%;height: 50%;">
-                    		<h4 class="text-uppercase pb-20">景点</h4>
+                    		<h4 class="text-uppercase pb-20">景点<a href="attractions/getAllSigns.action#attrSign" style="font-size: 12px;">more</a></h4>
 	                        <ul>
-	                            <li><a href="#">北京</a></li>
-	                            <li><a href="#">上海</a></li>
-	                            <li><a href="#">杭州</a></li>
-	                            <li><a href="#">西藏</a></li>
-	                            <li><a href="#">武汉</a></li>
-	                            <li><a href="#">湖南</a></li>
-	                            <li><a href="#">台湾</a></li>
-	                            <li><a href="#">新疆</a></li>
-	                            <li><a href="#">成都</a></li>
+	                            <s:if test="#session.attrShowList!=null">
+	                        		<s:iterator value="#session.attrShowList" var="attr">
+	                        			<li><a href="attractions/getAttrDetail.action?viewTitle=${attr.viewTitle }">${attr.viewTitle }</a></li>
+	                        		</s:iterator>
+	                        	</s:if>
+	                        </ul>
+                    	</div>
+                    	<div id="foodSpan" style="width: 100%;height: 50%;">
+                    		<h4 class="text-uppercase pb-20">美食<a href="attractions/getAllSigns.action#foodSign" style="font-size: 12px;">more</a></h4>
+	                        <ul>
+	                        	<s:if test="#session.foodShowList!=null">
+	                        		<s:iterator value="#session.foodShowList" var="food">
+	                        			<li><a href="attractions/getFoodDetail.action?id=${food.id }">${food.foodName }</a></li>
+	                        		</s:iterator>
+	                        	</s:if>
 	                        </ul>
                     	</div>
                     </div> 
+                    <div class="single_widget tag_widget">
+                        <h4 class="text-uppercase pb-20">热点</h4>
+                        <ul>
+                            <li><a href="attractions/getPointAttr.action?point=日常">日常</a></li>
+                            <li><a href="attractions/getPointAttr.action?point=艺术">艺术</a></li>
+                            <li><a href="attractions/getPointAttr.action?point=历史">历史</a></li>
+                            <li><a href="attractions/getPointAttr.action?point=美食">美食</a></li>
+                            <li><a href="attractions/getPointAttr.action?point=科技">科技</a></li>
+                            <li><a href="时尚">时尚</a></li>
+                        </ul>
+                    </div> 
                     
-                    <div class="single_widget cat_widget">
-                        <h4 class="text-uppercase pb-20">post categories</h4>
-                        <ul>
-                            <li>
-                                <a href="#">Technology <span>37</span></a>
-                            </li>
-                            <li>
-                                <a href="#">Lifestyle <span>37</span></a>
-                            </li>
-                            <li>
-                                <a href="#">Fashion <span>37</span></a>
-                            </li>
-                            <li>
-                                <a href="#">Art <span>37</span></a>
-                            </li>
-                            <li>
-                                <a href="#">Food <span>37</span></a>
-                            </li>
-                            <li>
-                                <a href="#">Architecture <span>37</span></a>
-                            </li>
-                            <li>
-                                <a href="#">Adventure <span>37</span></a>
-                            </li>                                
-                        </ul>
-                    </div>
-                    <div class="single_widget recent_widget">
-                        <h4 class="text-uppercase pb-20">Recent Posts</h4>
-                        <div class="active-recent-carusel">
-                            <div class="item">
-                                <image src="image/asset/slider.jpg" alt="">
-                                <p class="mt-20 title text-uppercase">Home Audio Recording <br>
-                                For Everyone</p>
-                                <p>02 Hours ago <span> <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                06 <i class="fa fa-comment-o" aria-hidden="true"></i>02</span></p>    
-                            </div>  
-                            <div class="item">
-                                <image src="image/asset/slider.jpg" alt="">
-                                <p class="mt-20 title text-uppercase">Home Audio Recording <br>
-                                For Everyone</p>
-                                <p>02 Hours ago <span> <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                06 <i class="fa fa-comment-o" aria-hidden="true"></i>02</span></p>    
-                            </div>  
-                            <div class="item">
-                                <image src="image/asset/slider.jpg" alt="">
-                                <p class="mt-20 title text-uppercase">Home Audio Recording <br>
-                                For Everyone</p>
-                                <p>02 Hours ago <span> <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                06 <i class="fa fa-comment-o" aria-hidden="true"></i>02</span></p>    
-                            </div>                                                                                            
-                        </div>
-                    </div>  
-                    <div class="single_widget cat_widget">
-                        <h4 class="text-uppercase pb-20">post archive</h4>
-                        <ul>
-                            <li>
-                                <a href="#">Dec'17 <span>37</span></a>
-                            </li>
-                            <li>
-                                <a href="#">Nov'17 <span>37</span></a>
-                            </li>
-                            <li>
-                                <a href="#">Oct'17 <span>37</span></a>
-                            </li>
-                            <li>
-                                <a href="#">Sept'17 <span>37</span></a>
-                            </li>
-                            <li>
-                                <a href="#">Aug'17 <span>37</span></a>
-                            </li>
-                            <li>
-                                <a href="#">Jul'17 <span>37</span></a>
-                            </li>
-                            <li>
-                                <a href="#">Jun'17 <span>37</span></a>
-                            </li>                                
-                        </ul>
-                    </div>                                                 
                 </div>
             </div>
         </div>    
@@ -286,7 +267,40 @@
 	       	}
     	});
     	
+    	$("#loadmore").click(function(){
+    		var currentpage=$("#currentPage").text();
+    		
+    		var c=parseInt(currentpage)+1;
+    		$.ajax({
+				url:"attractions/subAttrs.action",
+	            data:{"currentPage":c},
+	            async:true,
+	            type: "POST",
+	            dataType:"json",
+	            success: function(data)
+	                {
+	            		window.location.reload();
+		            	<%
+		            	current=(Integer)session.getAttribute("currentPage");
+		            	%>
+		            	console.log(current);
+	                }
+			});
+    	})
+    	
+    	$("#search").click(function(){
+    		$("#searchContent").val($("#scontent").val());
+    		$("#searchForm").submit();
+    	})
+    	
+    	
+    	$("#logout").click(function(){
+			window.location.href="http://localhost:8080/travelpu/user/logout.action"
+		})
+    	
     })
    
     </script>
+    <%-- <%current=(Integer)session.getAttribute("currentPage");%>
+    		var currentpage=<%=current%> --%>
 </html>

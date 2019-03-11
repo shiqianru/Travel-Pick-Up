@@ -17,6 +17,13 @@ public class Attractions {
 	private String raiderContent;
 	private Integer basicScore;
 	private Integer foodScore;
+	private String viewImgUrl;
+	public String getViewImgUrl() {
+		return viewImgUrl;
+	}
+	public void setViewImgUrl(String viewImgUrl) {
+		this.viewImgUrl = viewImgUrl;
+	}
 	private City city;
 	private List<Food> foodList;
 	

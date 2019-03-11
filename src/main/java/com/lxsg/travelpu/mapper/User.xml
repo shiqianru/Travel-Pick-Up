@@ -19,7 +19,7 @@
     
     <!-- 新插入行的主键（primary key）；需要包含<selectKey>语句，才会返回主键，否则返回值为null -->
     <insert id="regist" parameterType="com.lxsg.travelpu.doman.UserVO">
-        insert into user (username,password,displayPicUrl) value(#{username},#{password},#{displayPicUrl})
+        insert into user (username,password,displayPicUrl,registTime) value(#{username},#{password},#{displayPicUrl},DATE_FORMAT(NOW(),'%Y %m %d %H:%i:%s'))
         <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id" >
             SELECT @@IDENTITY AS ID
         </selectKey>
@@ -31,6 +31,21 @@
 	
 	<select id="getUser" resultType="com.lxsg.travelpu.doman.UserVO" >
         select * from user u where u.id=#{id}
+    </select>
+    
+    <update id="updateUser">
+    	update user 
+    	<set>
+            <if test="username != null">username=#{username},</if>
+            <if test="introduce != null">introduce=#{introduce},</if>
+            <if test="password != null">password=#{password},</if>
+            <if test="displayPicUrl != null">displayPicUrl=#{displayPicUrl}</if>
+        </set>
+        where id=#{id}
+    </update>
+    
+    <select id="searchPost" resultType="com.lxsg.travelpu.doman.PostVO">
+    	select * from post where postName like concat('%',#{postName},'%') or postContent like concat('%',#{postContent},'%')
     </select>
 
 </mapper>

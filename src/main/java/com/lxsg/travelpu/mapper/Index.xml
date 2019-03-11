@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!--映射文件中namespace要和dao层接口名称一致 -->
+<mapper namespace="com.lxsg.travelpu.dao.IndexDao">
+    
+    <select id="getIndexPostList" resultType="com.lxsg.travelpu.doman.PostVO">
+    	select * from post order by postTime desc limit 4
+    </select>
+    <select id="getIndexAttrList" resultType="com.lxsg.travelpu.doman.AttractionsVO">
+    	select * from attractions order by basicScore desc limit 3
+    </select>
+
+</mapper>

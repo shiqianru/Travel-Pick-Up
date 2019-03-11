@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="index" extends="struts-default" namespace="/">
+			
+	<interceptors>
+		<interceptor name="CommonInterceptor" class="com.lxsg.common.CommonInterceptor"/>
+	</interceptors>
+	
+	<action name="toIndex" class="com.lxsg.travelpu.controller.common.IndexAction" method="toIndex">
+		<result name="success">/jsp/index.jsp</result>
+	</action>
+	
+		
+		
+	</package>
+</struts>

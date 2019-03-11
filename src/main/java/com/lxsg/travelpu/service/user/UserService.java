@@ -26,6 +26,9 @@ public interface UserService {
 	//验证用户名是否存在
 	User isNameExist(String username);
 
+	int updateUser(UserVO currUserVO);
+
+	List<PostVO> searchPost(String searchContentUser);
 
 
 }

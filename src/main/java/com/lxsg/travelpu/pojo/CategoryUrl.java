@@ -2,7 +2,7 @@ package com.lxsg.travelpu.pojo;
 
 public class CategoryUrl {
 	
-	private Integer id;
+	private Integer ca_id;
 	private String imageUrl;
 	private User user;
 	private Integer userId;
@@ -27,11 +27,12 @@ public class CategoryUrl {
 	public void setUpTime(String upTime) {
 		this.upTime = upTime;
 	}
-	public Integer getId() {
-		return id;
+	
+	public Integer getCa_id() {
+		return ca_id;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+	public void setCa_id(Integer ca_id) {
+		this.ca_id = ca_id;
 	}
 	public String getImageUrl() {
 		return imageUrl;

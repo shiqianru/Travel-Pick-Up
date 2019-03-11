@@ -25,6 +25,9 @@
         <meta name="keywords" content="">
         <!-- meta character set -->
         <meta charset="UTF-8">
+        <meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Expires" content="0">
         <!-- Site Title -->
         <title>Blogger</title>
 
@@ -54,11 +57,10 @@
                 <div class="container">
                     <div class="row justify-content-start align-items-center d-flex">
                         <div class="col-lg-8 top-left">
-                            <h1 class="text-white mb-20">Archive News</h1>
+                            <h1 class="text-white mb-20">个人主页</h1>
                             <ul>
-                                <li><a href="index.html">Home</a><span class="lnr lnr-arrow-right"></span></li>
-                                <li><a href="category.html">Category</a><span class="lnr lnr-arrow-right"></span></li>
-                                <li><a href="single.html">Fashion</a></li>
+                                <li><a href="javascript:;">我的</a><span class="lnr lnr-arrow-right"></span></li>
+                                <li><a href="post/getAllPost.action">主页</a></li>
                             </ul>
                         </div>
                     </div>
@@ -96,7 +98,7 @@
 		                                    </p>
 		                                    <p class="footer pt-20">
 		                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-		                                    <a href="#">06 Likes</a>     <i class="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a href="#">02 Comments</a>
+		                                    <a href="#">${post.likeCount } 赞</a>     <i class="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a href="#">${post.commentCount } 评论</a>
 		                                    </p>
 		                                </div>
 		                            </div>
@@ -111,132 +113,49 @@
                         </div>                          
                     </div>
                     <div class="col-lg-4 sidebar-area">
-                    
-                        <div class="single_widget search_widget">
-                            <div id="imaginary_container" style="padding-bottom: 20px;" align="center"> 
-                                <div style="float: left;width: 50%;border-right: solid 0.5px #E6E6E6;">关注</div>
-                                <div style="float: left;width: 50%;">粉丝</div>
-                            </div> 
-                        </div>
-                        
-                        <div class="single_widget search_widget">
+                    	<div class="single_widget search_widget">
                             <div id="imaginary_container"> 
                                 <div class="input-group stylish-input-group">
-                                    <input type="text" class="form-control"  placeholder="Search" >
+                                    <input id="sContentUser" type="text" class="form-control"  placeholder="搜帖子" >
                                     <span class="input-group-addon">
-                                        <button type="submit">
+                                        <button id="submit" type="submit">
                                             <span class="lnr lnr-magnifier"></span>
                                         </button>  
                                     </span>
                                 </div>
                             </div> 
                         </div>
-                        
-
+                        <!-- search form -->
+                        <form id="searchUserForm" action="user/searchPost.action">
+                        	<input type="hidden" id="searchContentUser" name="searchContentUser">
+                        </form>
+                        <!-- search form -->
                         <div class="single_widget about_widget">
-                            <img src="image/asset/s-img.jpg" alt="">
-                            <h2 class="text-uppercase">Adele Gonzalez</h2>
+                            <img width="100px" src="${session.userVO.displayPicUrl}" alt="">
+                            <h2 class="text-uppercase">${session.userVO.username }</h2>
                             <p>
-                                MCSE boot camps have its supporters and
-                                its detractors. Some people do not understand why you should have to spend money
+                                 ${session.userVO.introduce }
                             </p>
-                            <div class="social-link">
-                                <a href="#"><button class="btn"><i class="fa fa-facebook" aria-hidden="true"></i> Like</button></a>
-                                <a href="#"><button class="btn"><i class="fa fa-twitter" aria-hidden="true"></i> follow</button></a>
-                            </div>
+                           <div id="imaginary_container" style="padding-bottom: 20px;padding-top: 20px;" align="center"> 
+                               <div style="float: left;width: 50%;border-right: solid 0.5px #E6E6E6;"><a href="post/getFocusList.action">${session.userVO.focusCount }&nbsp;关注</a></div>
+                               <div style="float: left;width: 50%;"><a href="post/getFansList.action">${session.userVO.fansCount }&nbsp;粉丝</a></div>
+                           </div> 
                         </div>
-                        <div class="single_widget cat_widget">
-                            <h4 class="text-uppercase pb-20">post categories</h4>
-                            <ul>
-                                <li>
-                                    <a href="#">Technology <span>37</span></a>
-                                </li>
-                                <li>
-                                    <a href="#">Lifestyle <span>37</span></a>
-                                </li>
-                                <li>
-                                    <a href="#">Fashion <span>37</span></a>
-                                </li>
-                                <li>
-                                    <a href="#">Art <span>37</span></a>
-                                </li>
-                                <li>
-                                    <a href="#">Food <span>37</span></a>
-                                </li>
-                                <li>
-                                    <a href="#">Architecture <span>37</span></a>
-                                </li>
-                                <li>
-                                    <a href="#">Adventure <span>37</span></a>
-                                </li>                                
-                            </ul>
-                        </div>
+                        
+                        
                         <div class="single_widget recent_widget">
-                            <h4 class="text-uppercase pb-20">Recent Posts</h4>
+                            <h4 class="text-uppercase pb-20">最近</h4>
                             <div class="active-recent-carusel">
-                                <div class="item">
-                                    <img src="image/asset/slider.jpg" alt="">
-                                    <p class="mt-20 title text-uppercase">Home Audio Recording <br>
-                                    For Everyone</p>
-                                    <p>02 Hours ago <span> <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                    06 <i class="fa fa-comment-o" aria-hidden="true"></i>02</span></p>    
-                                </div>  
-                                <div class="item">
-                                    <img src="image/asset/slider.jpg" alt="">
-                                    <p class="mt-20 title text-uppercase">Home Audio Recording <br>
-                                    For Everyone</p>
-                                    <p>02 Hours ago <span> <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                    06 <i class="fa fa-comment-o" aria-hidden="true"></i>02</span></p>    
-                                </div>  
-                                <div class="item">
-                                    <img src="image/asset/slider.jpg" alt="">
-                                    <p class="mt-20 title text-uppercase">Home Audio Recording <br>
-                                    For Everyone</p>
-                                    <p>02 Hours ago <span> <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                    06 <i class="fa fa-comment-o" aria-hidden="true"></i>02</span></p>    
-                                </div>                                                                                            
+                            	<s:iterator value="#session.recentCateList" var="recentCate">
+                            		<div class="item">
+                            			<img height="200px" src="upload/${recentCate.imageUrl }" alt="">
+	                                   
+	                                    <p class="mt-20 title text-uppercase">${recentCate.postVO.postName }</p>
+	                                    <p>${recentCate.upTime }<span></span></p>    
+	                                </div> 
+                            	</s:iterator>                                                                                            
                             </div>
                         </div>  
-                        <div class="single_widget cat_widget">
-                            <h4 class="text-uppercase pb-20">post archive</h4>
-                            <ul>
-                                <li>
-                                    <a href="#">Dec'17 <span>37</span></a>
-                                </li>
-                                <li>
-                                    <a href="#">Nov'17 <span>37</span></a>
-                                </li>
-                                <li>
-                                    <a href="#">Oct'17 <span>37</span></a>
-                                </li>
-                                <li>
-                                    <a href="#">Sept'17 <span>37</span></a>
-                                </li>
-                                <li>
-                                    <a href="#">Aug'17 <span>37</span></a>
-                                </li>
-                                <li>
-                                    <a href="#">Jul'17 <span>37</span></a>
-                                </li>
-                                <li>
-                                    <a href="#">Jun'17 <span>37</span></a>
-                                </li>                                
-                            </ul>
-                        </div> 
-                        <div class="single_widget tag_widget">
-                            <h4 class="text-uppercase pb-20">Tag Clouds</h4>
-                            <ul>
-                                <li><a href="#">Lifestyle</a></li>
-                                <li><a href="#">Art</a></li>
-                                <li><a href="#">Adventure</a></li>
-                                <li><a href="#">Food</a></li>
-                                <li><a href="#">Technology</a></li>
-                                <li><a href="#">Fashion</a></li>
-                                <li><a href="#">Adventure</a></li>
-                                <li><a href="#">Food</a></li>
-                                <li><a href="#">Technology</a></li>
-                            </ul>
-                        </div>                                                 
                     </div>
                 </div>
             </div>    
@@ -259,6 +178,12 @@
         </body>
        <script type="text/javascript">
 	    $(window).load(function(){
+	    	var errormsg='${session.errormsg}';
+			if(errormsg!=null && errormsg!=""){
+				<%session.setAttribute("errormsg", "");%>
+				alert(errormsg);
+			}
+			
 	    	var content=$(".postContent");
 	    	$(".postContent").each(function(){
 	    	   if($(this).text().length>180){
@@ -272,6 +197,16 @@
 	     	   $(this).append(postTime[1],"<br/>",postTime[0]);
 	    	})
 	    	
+	    	$("#submit").click(function(){
+	    		var sContent=$("#sContentUser").val();
+	    		$("#searchContentUser").val(sContent);
+	    		$("#searchUserForm").submit();
+	    	})
+	    	
+	    	
+	    	$("#logout").click(function(){
+			window.location.href="http://localhost:8080/travelpu/user/logout.action"
+		})
 	    	
 	    })
 	   

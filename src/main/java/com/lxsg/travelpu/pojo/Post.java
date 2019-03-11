@@ -16,7 +16,6 @@ public class Post {
 	private User user;
 	private Integer userId;
 	private List<CategoryUrl> categoryUrl;
-
 	public Integer getUserId() {
 		return userId;
 	}

@@ -195,5 +195,10 @@
 			return false;
 		}
 	})
+	
+	
+	$("#logout").click(function(){
+			window.location.href="http://localhost:8080/travelpu/user/logout.action"
+		})
 	</script>
 </html>

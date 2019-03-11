@@ -45,11 +45,10 @@
                 <div class="container">
                     <div class="row justify-content-start align-items-center d-flex">
                         <div class="col-lg-8 top-left">
-                            <h1 class="text-white mb-20">Archive News</h1>
+                            <h1 class="text-white mb-20">推荐</h1>
                             <ul>
-                                <li><a href="index.html">Home</a><span class="lnr lnr-arrow-right"></span></li>
-                                <li><a href="category.html">Category</a><span class="lnr lnr-arrow-right"></span></li>
-                                <li><a href="single.html">Fashion</a></li>
+                                <li><a href="attractions/getRecommend.action">推荐</a><span class="lnr lnr-arrow-right"></span></li>
+                                <li><a href="attractions/getAllSigns.action#citySign">城市</a></li>
                             </ul>
                         </div>
                     </div>
@@ -66,48 +65,48 @@
                 <div class="row justify-content-center d-flex">
                     <div class="col-lg-8">
                         <div class="post-lists search-list">
-                            <s:iterator value="#session.attrOfCityList" var="attraction">
-		                    	<div class="single-list flex-row d-flex" style="width: 700px;height: 250px;"><!-- 一个单元 -->
-		                            <div class="thumb" style="width: 30%;height: 100%;">
-		                                <img src="image/asset/l1.jpg" alt="${attraction.viewTitle }" />
-		                            </div>
-		                            <div class="detail" style="width: 70%;height: 100%;padding-bottom: 20px;">
-		                            	<div style="width: 100%;height: 20%;">
-		                               		<a href="attractions/getAttrDetail.action?viewTitle=${attraction.viewTitle }"><h4 class="pb-20">${attraction.viewTitle }</h4></a>
-		                                </div>
-		                                <div style="width: 100%;height:50%;">
-		                                	<p class="viewDiscrib">
-			                                     ${attraction.viewDiscrib}
-			                                </p>
-		                                </div>
-		                                
-		                                <div id="view-label"  style="width: 100%;height: 30%;">
-		                                	<s:if test="#attraction.viewPoint1 != null">
-		                                		<div style="width: 90px;height: 40px;border: solid 1px #D5D5D5;float: left;margin-right: 10px;line-height:40px;text-align: center;">${attraction.viewPoint1 }</div>
-		                                	</s:if>
-		                                	<s:if test="#attraction.viewPoint2 != null">
-		                                		<div style="width: 90px;height: 40px;border: solid 1px #D5D5D5;float: left;margin-right: 10px;line-height:40px;text-align: center;">${attraction.viewPoint2 }</div>
-		                                	</s:if>
-		                                	<s:if test="#attraction.viewPoint3 != null">
-		                                		<div style="width: 90px;height: 40px;border: solid 1px #D5D5D5;float: left;margin-right: 10px;line-height:40px;text-align: center;">${attraction.viewPoint3 }</div>
-		                                	</s:if>
-		                                	<s:if test="#attraction.viewPoint4 != null">
-		                                		<div style="width: 90px;height: 40px;border: solid 1px #D5D5D5;float: left;margin-right: 10px;line-height:40px;text-align: center;">${attraction.viewPoint4 }</div>
-		                                	</s:if>
-		                                	<s:if test="#attraction.viewPoint5 != null">
-		                                		<div style="width: 90px;height: 40px;border: solid 1px #D5D5D5;float: left;margin-right: 10px;line-height:40px;text-align: center;">${attraction.viewPoint5 }</div>
-		                                	</s:if>
-		                                </div>
-		                            </div>
-		                        </div>
-		                    </s:iterator>
-                            <div class="justify-content-center d-flex">
-                                <a class="text-uppercase primary-btn loadmore-btn mt-40 mb-60" href="#"> Load More Post</a>
-                            </div>                                                                     
+	                        <s:if test="#session.attrOfCityList!=null && !#session.attrOfCityList.isEmpty()">
+	                        	 <s:iterator value="#session.attrOfCityList" var="attraction">
+			                    	<div class="single-list flex-row d-flex" style="width: 700px;height: 250px;"><!-- 一个单元 -->
+			                            <div class="thumb" style="width: 30%;height: 100%;">
+			                                <img src="image/asset/l1.jpg" alt="${attraction.viewTitle }" />
+			                            </div>
+			                            <div class="detail" style="width: 70%;height: 100%;padding-bottom: 20px;">
+			                            	<div style="width: 100%;height: 20%;">
+			                               		<a href="attractions/getAttrDetail.action?viewTitle=${attraction.viewTitle }"><h4 class="pb-20">${attraction.viewTitle }</h4></a>
+			                                </div>
+			                                <div style="width: 100%;height:50%;">
+			                                	<p class="viewDiscrib">
+				                                     ${attraction.viewDiscrib}
+				                                </p>
+			                                </div>
+			                                
+			                                <div id="view-label"  style="width: 100%;height: 30%;">
+			                                	<s:if test="#attraction.viewPoint1 != null">
+			                                		<div style="width: 90px;height: 40px;border: solid 1px #D5D5D5;float: left;margin-right: 10px;line-height:40px;text-align: center;">${attraction.viewPoint1 }</div>
+			                                	</s:if>
+			                                	<s:if test="#attraction.viewPoint2 != null">
+			                                		<div style="width: 90px;height: 40px;border: solid 1px #D5D5D5;float: left;margin-right: 10px;line-height:40px;text-align: center;">${attraction.viewPoint2 }</div>
+			                                	</s:if>
+			                                	<s:if test="#attraction.viewPoint3 != null">
+			                                		<div style="width: 90px;height: 40px;border: solid 1px #D5D5D5;float: left;margin-right: 10px;line-height:40px;text-align: center;">${attraction.viewPoint3 }</div>
+			                                	</s:if>
+			                                	<s:if test="#attraction.viewPoint4 != null">
+			                                		<div style="width: 90px;height: 40px;border: solid 1px #D5D5D5;float: left;margin-right: 10px;line-height:40px;text-align: center;">${attraction.viewPoint4 }</div>
+			                                	</s:if>
+			                                	<s:if test="#attraction.viewPoint5 != null">
+			                                		<div style="width: 90px;height: 40px;border: solid 1px #D5D5D5;float: left;margin-right: 10px;line-height:40px;text-align: center;">${attraction.viewPoint5 }</div>
+			                                	</s:if>
+			                                </div>
+			                            </div>
+			                        </div>
+			                    </s:iterator>
+	                        </s:if>
+                            <s:else><span>还没有相关推荐哦！</span></s:else>
                         </div>                          
                     </div>
                     <div class="col-lg-4 sidebar-area">
-                        <div class="single_widget search_widget">
+                        <%-- <div class="single_widget search_widget">
                             <div id="imaginary_container"> 
                                 <div class="input-group stylish-input-group">
                                     <input type="text" class="form-control"  placeholder="Search" >
@@ -118,110 +117,54 @@
                                     </span>
                                 </div>
                             </div> 
-                        </div>
+                        </div> --%>
 
-                        <div class="single_widget about_widget">
-                            <img src="img/asset/s-img.jpg" alt="">
-                            <h2 class="text-uppercase">Adele Gonzalez</h2>
-                            <p>
-                                MCSE boot camps have its supporters and
-                                its detractors. Some people do not understand why you should have to spend money
-                            </p>
-                            <div class="social-link">
-                                <a href="#"><button class="btn"><i class="fa fa-facebook" aria-hidden="true"></i> Like</button></a>
-                                <a href="#"><button class="btn"><i class="fa fa-twitter" aria-hidden="true"></i> follow</button></a>
-                            </div>
-                        </div>
-                        <div class="single_widget cat_widget">
-                            <h4 class="text-uppercase pb-20">post categories</h4>
-                            <ul>
-                                <li>
-                                    <a href="#">Technology <span>37</span></a>
-                                </li>
-                                <li>
-                                    <a href="#">Lifestyle <span>37</span></a>
-                                </li>
-                                <li>
-                                    <a href="#">Fashion <span>37</span></a>
-                                </li>
-                                <li>
-                                    <a href="#">Art <span>37</span></a>
-                                </li>
-                                <li>
-                                    <a href="#">Food <span>37</span></a>
-                                </li>
-                                <li>
-                                    <a href="#">Architecture <span>37</span></a>
-                                </li>
-                                <li>
-                                    <a href="#">Adventure <span>37</span></a>
-                                </li>                                
-                            </ul>
-                        </div>
-                        <div class="single_widget recent_widget">
-                            <h4 class="text-uppercase pb-20">Recent Posts</h4>
-                            <div class="active-recent-carusel">
-                                <div class="item">
-                                    <img src="img/asset/slider.jpg" alt="">
-                                    <p class="mt-20 title text-uppercase">Home Audio Recording <br>
-                                    For Everyone</p>
-                                    <p>02 Hours ago <span> <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                    06 <i class="fa fa-comment-o" aria-hidden="true"></i>02</span></p>    
-                                </div>  
-                                <div class="item">
-                                    <img src="img/asset/slider.jpg" alt="">
-                                    <p class="mt-20 title text-uppercase">Home Audio Recording <br>
-                                    For Everyone</p>
-                                    <p>02 Hours ago <span> <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                    06 <i class="fa fa-comment-o" aria-hidden="true"></i>02</span></p>    
-                                </div>  
-                                <div class="item">
-                                    <img src="img/asset/slider.jpg" alt="">
-                                    <p class="mt-20 title text-uppercase">Home Audio Recording <br>
-                                    For Everyone</p>
-                                    <p>02 Hours ago <span> <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                    06 <i class="fa fa-comment-o" aria-hidden="true"></i>02</span></p>    
-                                </div>                                                                                            
-                            </div>
-                        </div>  
-                        <div class="single_widget cat_widget">
-                            <h4 class="text-uppercase pb-20">post archive</h4>
-                            <ul>
-                                <li>
-                                    <a href="#">Dec'17 <span>37</span></a>
-                                </li>
-                                <li>
-                                    <a href="#">Nov'17 <span>37</span></a>
-                                </li>
-                                <li>
-                                    <a href="#">Oct'17 <span>37</span></a>
-                                </li>
-                                <li>
-                                    <a href="#">Sept'17 <span>37</span></a>
-                                </li>
-                                <li>
-                                    <a href="#">Aug'17 <span>37</span></a>
-                                </li>
-                                <li>
-                                    <a href="#">Jul'17 <span>37</span></a>
-                                </li>
-                                <li>
-                                    <a href="#">Jun'17 <span>37</span></a>
-                                </li>                                
-                            </ul>
-                        </div> 
                         <div class="single_widget tag_widget">
-                            <h4 class="text-uppercase pb-20">Tag Clouds</h4>
+	                    	<div id="citySpan" style="width: 100%;height: 50%;">
+	                    		<div class="citySpan" style="width: 100%;height: 20%;">
+	                    			<h4 class="text-uppercase pb-20">城市<a href="attractions/getAllSigns.action#citySign" style="font-size: 12px;">more</a></h4>
+	                    		</div>
+	                    		<div style="width: 100%;height: 80%;">
+		                    		<ul>
+		                    			<s:if test="#session.cityShowList!=null">
+		                    				<s:iterator value="#session.cityShowList" var="city">
+		                    					<li><a href="attractions/getAttrOfCity.action?id=${city.id }">${city.cityName }</a></li>
+		                    				</s:iterator>
+		                    			</s:if>
+			                        </ul>
+	                    		</div>
+		                       
+	                    	</div>
+	                        <div id="attractionSpan" style="width: 100%;height: 50%;">
+	                    		<h4 class="text-uppercase pb-20">景点<a href="attractions/getAllSigns.action#attrSign" style="font-size: 12px;">more</a></h4>
+		                        <ul>
+		                            <s:if test="#session.attrShowList!=null">
+		                        		<s:iterator value="#session.attrShowList" var="attr">
+		                        			<li><a href="attractions/getAttrDetail.action?viewTitle=${attr.viewTitle }">${attr.viewTitle }</a></li>
+		                        		</s:iterator>
+		                        	</s:if>
+		                        </ul>
+	                    	</div>
+	                    	<div id="foodSpan" style="width: 100%;height: 50%;">
+	                    		<h4 class="text-uppercase pb-20">美食<a href="attractions/getAllSigns.action#foodSign" style="font-size: 12px;">more</a></h4>
+		                        <ul>
+		                        	<s:if test="#session.foodShowList!=null">
+		                        		<s:iterator value="#session.foodShowList" var="food">
+		                        			<li><a href="attractions/getFoodDetail.action?id=${food.id }">${food.foodName }</a></li>
+		                        		</s:iterator>
+		                        	</s:if>
+		                        </ul>
+	                    	</div>
+	                    </div> 
+                        <div class="single_widget tag_widget">
+                            <h4 class="text-uppercase pb-20">热点</h4>
                             <ul>
-                                <li><a href="#">Lifestyle</a></li>
-                                <li><a href="#">Art</a></li>
-                                <li><a href="#">Adventure</a></li>
-                                <li><a href="#">Food</a></li>
-                                <li><a href="#">Technology</a></li>
-                                <li><a href="#">Fashion</a></li>
-                                <li><a href="#">Adventure</a></li>
-                                <li><a href="#">Food</a></li>
-                                <li><a href="#">Technology</a></li>
+                                <li><a href="attractions/getPointAttr.action?point=日常">日常</a></li>
+                                <li><a href="attractions/getPointAttr.action?point=艺术">艺术</a></li>
+                                <li><a href="attractions/getPointAttr.action?point=历史">历史</a></li>
+                                <li><a href="attractions/getPointAttr.action?point=美食">美食</a></li>
+                                <li><a href="attractions/getPointAttr.action?point=科技">科技</a></li>
+                                <li><a href="时尚">时尚</a></li>
                             </ul>
                         </div>                                                 
                     </div>
@@ -253,6 +196,9 @@
 	       	}
     	});
     	
+    	$("#logout").click(function(){
+			window.location.href="http://localhost:8080/travelpu/user/logout.action"
+		})
     })
    
     </script>

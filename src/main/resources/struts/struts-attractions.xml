@@ -11,6 +11,12 @@
 		<action name="getAttrDetail" class="com.lxsg.travelpu.controller.attractions.RecommendAction" method="getAttrDetail">
 			<result name="success">/jsp/scenery/attrDetail.jsp</result>
 		</action>
+		<action name="getFoodDetail" class="com.lxsg.travelpu.controller.attractions.RecommendAction" method="getFoodDetail">
+			<result name="success">/jsp/scenery/foodDetail.jsp</result>
+		</action>
+		<action name="getCityDetail" class="com.lxsg.travelpu.controller.attractions.RecommendAction" method="getCityDetail">
+			<result name="success">/jsp/scenery/cityDetail.jsp</result>
+		</action>
 		
 		<action name="getAllSigns" class="com.lxsg.travelpu.controller.attractions.RecommendAction" method="getAllSigns">
 			<result name="success">/jsp/scenery/sign.jsp</result>
@@ -18,6 +24,24 @@
 		
 		<action name="getAttrOfCity" class="com.lxsg.travelpu.controller.attractions.RecommendAction" method="getAttrOfCity">
 			<result name="success">/jsp/scenery/attrOfCity.jsp</result>
+		</action>
+		
+		<action name="search" class="com.lxsg.travelpu.controller.attractions.RecommendAction" method="search">
+			<result name="success">/jsp/scenery/searchResult.jsp</result>
+		</action>
+		
+		<action name="subAttrs" class="com.lxsg.travelpu.controller.attractions.RecommendAction" method="subAttrs">
+		</action>
+		
+		<action name="sortNew" class="com.lxsg.travelpu.controller.attractions.RecommendAction" method="sortNew">
+			<result name="success">/jsp/scenery/sortNew.jsp</result>
+		</action>
+		<action name="sortHot" class="com.lxsg.travelpu.controller.attractions.RecommendAction" method="sortHot">
+			<result name="success">/jsp/scenery/sortHot.jsp</result>
+		</action>
+		
+		<action name="getPointAttr" class="com.lxsg.travelpu.controller.attractions.RecommendAction" method="getPointAttr">
+			<result name="success">/jsp/scenery/pointAttr.jsp</result>
 		</action>
 	</package>
 	

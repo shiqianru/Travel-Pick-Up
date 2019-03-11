@@ -42,10 +42,55 @@
 	
 	<action name="commentPost" class="com.lxsg.travelpu.controller.user.PostAction" method="commentPost">
 	</action>
+	<action name="commentComment" class="com.lxsg.travelpu.controller.user.PostAction" method="commentComment">
+	</action>
 	
 	<action name="test" class="com.lxsg.travelpu.controller.user.PostAction" method="test">
            <result name="success">/jsp/user/postDetail.jsp</result>
            <result name="error">/jsp/error.jsp</result>
 	</action>
+	
+	<action name="square" class="com.lxsg.travelpu.controller.user.PostAction" method="square">
+		<interceptor-ref name="CommonInterceptor"></interceptor-ref>
+		<interceptor-ref name="defaultStack"></interceptor-ref>
+		<result name="success">/jsp/post/postIndex.jsp</result>
+		<result name="loginFail">/jsp/user/login.jsp</result>
+	</action>
+	<action name="friendSquare" class="com.lxsg.travelpu.controller.user.PostAction" method="friendSquare">
+		<interceptor-ref name="CommonInterceptor"></interceptor-ref>
+		<interceptor-ref name="defaultStack"></interceptor-ref>
+		<result name="success">/jsp/post/friendPostIndex.jsp</result>
+		<result name="loginFail">/jsp/user/login.jsp</result>
+	</action>
+	<action name="getPointPost" class="com.lxsg.travelpu.controller.user.PostAction" method="getPointPost">
+		<interceptor-ref name="CommonInterceptor"></interceptor-ref>
+		<interceptor-ref name="defaultStack"></interceptor-ref>
+		<result name="success">/jsp/post/pointPost.jsp</result>
+		<result name="loginFail">/jsp/user/login.jsp</result>
+	</action>
+	
+	<action name="getUserHomePage" class="com.lxsg.travelpu.controller.user.PostAction" method="getUserHomePage">
+		<result name="success">/jsp/user/postUserHomePage.jsp</result>
+	</action>
+	
+	<action name="followUser" class="com.lxsg.travelpu.controller.user.PostAction" method="followUser">
+	</action>
+	<action name="unFollowUser" class="com.lxsg.travelpu.controller.user.PostAction" method="unFollowUser">
+	</action>
+	
+	<action name="getFansList" class="com.lxsg.travelpu.controller.user.PostAction" method="getFansList">
+		<result name="success">/jsp/user/fans.jsp</result>
+	</action>
+	<action name="getFocusList" class="com.lxsg.travelpu.controller.user.PostAction" method="getFocusList">
+		<result name="success">/jsp/user/focus.jsp</result>
+	</action>
+	
+	<action name="getAlbum" class="com.lxsg.travelpu.controller.user.PostAction" method="getAlbum">
+		<interceptor-ref name="CommonInterceptor"></interceptor-ref>
+		<interceptor-ref name="defaultStack"></interceptor-ref>
+		<result name="success">/jsp/user/album.jsp</result>
+		<result name="loginFail">/jsp/user/login.jsp</result>
+	</action>
+	
 	</package>
 </struts>
